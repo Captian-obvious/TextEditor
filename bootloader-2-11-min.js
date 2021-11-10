@@ -1,4 +1,60 @@
-'use strict';var APP_MAJOR_VERSION=2,APP_MINOR_VERSION=11,APP_REVISION="",APP_IS_MINIFIED_RELEASE=!0,APP_GOOGLE_ANALYTICS_ID="UA-74999669-1",hasMainAppScriptBeenAutoRetried=!1,hasGapiScriptBeenAutoRetried=!1,hasAnalyticsScriptBeenAutoRetried=!1,hasAdSenseScriptBeenAutoRetried=!1,hasJsChardetScriptBeenAutoRetried=!1,hasAceEditorScriptBeenAutoRetried=!1,isAppLoadFailure=!1,appLoadFailureUiShown=!1,appLoadFailureMessage="",adsenseScriptLoadError=!1,adsenseScriptLoadErrorHasBeenLogged=!1,analyticsLoaded=!1,aceEditorLoaded=!1,jschardetLoaded=!1;function isBrowserIE11OrOlder(){try{var a=window.navigator.userAgent,b=a.indexOf("MSIE ");if(0<b)return!0;var c=a.indexOf("Trident/");return!!(0<c)}catch(a){return console.log("error during detection of browser: "+a),!0}}var isSupportedBrowser=!isBrowserIE11OrOlder(),adsbygoogle=null,dataLayer=null;window.dataLayer=window.dataLayer||[],dataLayer=window.dataLayer;function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config",APP_GOOGLE_ANALYTICS_ID);var te={};te.VERSION="2."+APP_MINOR_VERSION+"",window.console.log("===== LOADING TEXT EDITOR "+te.VERSION+" ====="),window.console.log("isSupportedBrowser: ",isSupportedBrowser);var MAINAPP,EDITOR,APP_CONFIG={clientId:"591525900269-94ok9krafau8qa24666btvccmsfnq5fp.apps.googleusercontent.com",appId:"591525900269",scopes:"openid email profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.install",apiKey:"AIzaSyAHcWeACQ2g-3dCbm46uITUOHGIRQN304s"},firstAuthIsPending=!0,firstAuthSuccessful=!1,domLoaded=!1,CURRENT_AUTH_USER=0,CURRENT_USER_INFO=null,CLAIM=null,ID_TOKEN=null,ACCESS_TOKEN=null,isForDirectNew=isUrlParamKeyPresent("new");function detectDevice(){return window.matchMedia("only screen and (max-width: 639px)").matches?"phone":window.matchMedia("only screen and (max-width: 765px)").matches?"device":"computer"}var deviceTypeForAdSense=detectDevice(),adLoadedDuringInit=!1,adNotLoadedReason="(default)";if("phone"==deviceTypeForAdSense||"device"==deviceTypeForAdSense)adLoadedDuringInit=!1,adNotLoadedReason="mobile device: "+deviceTypeForAdSense;else if(!isSupportedBrowser){adLoadedDuringInit=!1;var isIe11=-1!=(window.navigator.userAgent||"").indexOf("Trident/");adNotLoadedReason="unsupported browser (isIe11="+isIe11+")"}else if(!window)adLoadedDuringInit=!1,adNotLoadedReason="window object not available";else if(window&&null!=window.location&&null!=window.location.search){var urlContainsNew=-1!=window.location.search.indexOf("new"),urlContainsState=-1!=window.location.search.indexOf("state");if(urlContainsNew)adLoadedDuringInit=!0;else if(!urlContainsState)adLoadedDuringInit=!0,adNotLoadedReason="did not find \"state\" or \"new\" keywords in URL. window.location.search: "+window.location.search;else if(window&&null!=window.document&&null!=window.document.referrer&&window.document.referrer.toLowerCase){var isValidReferrer=-1!=window.document.referrer.toLowerCase().indexOf(".google.com");isValidReferrer?adLoadedDuringInit=!0:(adLoadedDuringInit=!0,adNotLoadedReason="Detected an invalid referrer: "+window.document.referrer.toLowerCase())}else adLoadedDuringInit=!0,adNotLoadedReason="Did not detect valid referrer to parse. window.document.referrer: "+(window.document?window.document.referrer:"no_document")}else adLoadedDuringInit=!0,adNotLoadedReason="Did not detect valid window search location to parse. window.location.search: "+(window.location?window.location.search:"no_location");adLoadedDuringInit&&((adsbygoogle=window.adsbygoogle||[]).push({}),adLoadedDuringInit=!0);var STATE={};isForDirectNew||(STATE=parseUrlState(),clearUrlState());function getReferringSource(){var a=document&&document.referrer?document.referrer.toLowerCase():"";return-1==a.indexOf("drive.google.com")?-1==a.indexOf("mail.google.com")?"general":"gmail":"drive"}function execLater(a,b,c){window.setTimeout(function(){a(),b&&b()},c||0)}function updateUiAfterDomLoadedForUnsupportedBrowser(){window.console.log("Showing alternate UI for unsupported browser."),logImpression("Unsupported browser: updateUiAfterDomLoad()","app_load"),showEl(document.getElementById("mainScrollableContent"),!1),showEl(document.getElementById("unsupportedBrowserContent"),!0)}function maybeUpdateUiAForAppLoadFailure(a){appLoadFailureUiShown||isSupportedBrowser&&(window.console.log("Showing alternate UI for app load failure."),document&&"loading"!==document.readyState&&(showEl(document.getElementById("mainScrollableContent"),!1),showEl(document.getElementById("appLoadErrorContent"),!0),document.getElementById("appLoadErrorDetails").textContent="Error details: "+a,appLoadFailureUiShown=!0,logImpression("app_load_failure","app_load",a)))}function handleDomLoaded(){try{if(domLoaded)return;if(domLoaded=!0,console.log("In handle Dom Loaded(). domLoaded: "+domLoaded+"; isSupportedBrowser: "+isSupportedBrowser),!adsenseScriptLoadError&&adLoadedDuringInit&&isSupportedBrowser||(showEl(document.getElementById("topBanner"),!1),showEl(document.getElementById("adHeading"),!1),document.getElementById("mainEditorContainer").classList.add("adjustedHeightForNoAdShown"),document.getElementById("mainScrollableContent").classList.add("adjustedHeightForNoAdShown"),document.getElementById("unsupportedBrowserContent").classList.add("adjustedHeightForNoAdShown"),document.getElementById("appLoadErrorContent").classList.add("adjustedHeightForNoAdShown"),document.getElementById("mainBackgroundSpinner").classList.add("adjustedHeightForNoAdShownBackgroundSpinner")),!isSupportedBrowser)return void updateUiAfterDomLoadedForUnsupportedBrowser();if(isAppLoadFailure)return void maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage);document.getElementById("copyright").textContent+=" v"+te.VERSION,updateUiForDevice();var a=null!=getFileId(),b=a?getReferringSource():"general";a&&"gmail"!=b&&(b="drive");var c="drive"==b,d="gmail"==b,e=!(c||d||isForDirectNew);document.getElementById("startPageIconImgDrive").removeAttribute("visibilityHidden"),showEl(document.getElementById("startPageIconImgGeneral"),e||isForDirectNew),showEl(document.getElementById("startPageIconImgGmail"),d),showEl(document.getElementById("startPageIconImgDrive"),c),showEl(document.getElementById("startPageGeneralDetails"),e),showEl(document.getElementById("startPageGmailDetails"),d),showEl(document.getElementById("startPageDriveDetails"),c),showEl(document.getElementById("startPageNewDetails"),isForDirectNew),document.getElementById("startPageDriveDetails").style.visibility="",showEl(document.getElementById("startPagePrompt"),!0),document.getElementById("startPagePrompt").style.visibility="",MAINAPP&&(MAINAPP.initAfterDomLoaded(getFileId()),EDITOR&&MAINAPP.initializeEditorAfterDomLoaded())}catch(a){throw logImpression("handle_dom_loaded_err","app_load",a),a}}function showEl(a,b){a.hidden=!b}
+'use strict';
+var APP_MAJOR_VERSION=2,APP_MINOR_VERSION=11,APP_REVISION="",APP_IS_MINIFIED_RELEASE=!0,APP_GOOGLE_ANALYTICS_ID="UA-74999669-1",hasMainAppScriptBeenAutoRetried=!1,hasGapiScriptBeenAutoRetried=!1,hasAnalyticsScriptBeenAutoRetried=!1,hasAdSenseScriptBeenAutoRetried=!1,hasJsChardetScriptBeenAutoRetried=!1,hasAceEditorScriptBeenAutoRetried=!1,isAppLoadFailure=!1,appLoadFailureUiShown=!1,appLoadFailureMessage="",adsenseScriptLoadError=!1,adsenseScriptLoadErrorHasBeenLogged=!1,analyticsLoaded=!1,aceEditorLoaded=!1,jschardetLoaded=!1;
+function isBrowserIE11OrOlder(){
+    try{
+        var a=window.navigator.userAgent,b=a.indexOf("MSIE ");
+        if(0<b)return!0;var c=a.indexOf("Trident/");
+        return!!(0<c)
+    }catch(a){
+        return console.log("error during detection of browser: "+a),!0
+    }
+}
+var isSupportedBrowser=!isBrowserIE11OrOlder(),adsbygoogle=null,dataLayer=null;window.dataLayer=window.dataLayer||[],dataLayer=window.dataLayer;
+function gtag(){
+    dataLayer.push(arguments)
+}
+gtag("js",new Date),gtag("config",APP_GOOGLE_ANALYTICS_ID);
+var te={};
+te.VERSION="2."+APP_MINOR_VERSION+"",window.console.log("===== LOADING TEXT EDITOR "+te.VERSION+" ====="),window.console.log("isSupportedBrowser: ",isSupportedBrowser);
+var MAINAPP,EDITOR,APP_CONFIG={
+    clientId:"591525900269-94ok9krafau8qa24666btvccmsfnq5fp.apps.googleusercontent.com",appId:"591525900269",scopes:"openid email profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.install",apiKey:"AIzaSyAHcWeACQ2g-3dCbm46uITUOHGIRQN304s"},firstAuthIsPending=!0,firstAuthSuccessful=!1,domLoaded=!1,CURRENT_AUTH_USER=0,CURRENT_USER_INFO=null,CLAIM=null,ID_TOKEN=null,ACCESS_TOKEN=null,isForDirectNew=isUrlParamKeyPresent("new");
+function detectDevice(){
+    return window.matchMedia("only screen and (max-width: 639px)").matches?"phone":window.matchMedia("only screen and (max-width:765px)").matches?"device":"computer"
+}
+var deviceTypeForAdSense=detectDevice(),adLoadedDuringInit=!1,adNotLoadedReason="(default)";
+if("phone"==deviceTypeForAdSense||"device"==deviceTypeForAdSense)adLoadedDuringInit=!1,adNotLoadedReason="mobile device: "+deviceTypeForAdSense;
+else 
+    if(!isSupportedBrowser){
+        adLoadedDuringInit=!1;
+                            var isIe11=-1!=(window.navigator.userAgent||"").indexOf("Trident/");
+        adNotLoadedReason="unsupported browser (isIe11="+isIe11+")"
+    }else 
+        if(!window)adLoadedDuringInit=!1,adNotLoadedReason="window object not available";
+else 
+    if(window&&null!=window.location&&null!=window.location.search){
+        var urlContainsNew=-1!=window.location.search.indexOf("new"),urlContainsState=-1!=window.location.search.indexOf("state");
+        if(urlContainsNew)adLoadedDuringInit=!0;
+        else 
+            if(!urlContainsState)adLoadedDuringInit=!0,adNotLoadedReason="did not find \"state\" or \"new\" keywords in URL. window.location.search: "+window.location.search;
+        else 
+            if(window&&null!=window.document&&null!=window.document.referrer&&window.document.referrer.toLowerCase){
+                var isValidReferrer=-1!=window.document.referrer.toLowerCase().indexOf(".google.com");isValidReferrer?adLoadedDuringInit=!0:(adLoadedDuringInit=!0,adNotLoadedReason="Detected an invalid referrer: "+window.document.referrer.toLowerCase())
+            }else 
+                adLoadedDuringInit=!0,adNotLoadedReason="Did not detect valid referrer to parse. window.document.referrer: "+(window.document?window.document.referrer:"no_document")
+    }else 
+        adLoadedDuringInit=!0,adNotLoadedReason="Did not detect valid window search location to parse. window.location.search: "+(window.location?window.location.search:"no_location");
+adLoadedDuringInit&&((adsbygoogle=window.adsbygoogle||[]).push({}),adLoadedDuringInit=!0);var STATE={};isForDirectNew||(STATE=parseUrlState(),clearUrlState());
+function getReferringSource(){
+    var a=document&&document.referrer?document.referrer.toLowerCase():"";return-1==a.indexOf("drive.google.com")?-1==a.indexOf("mail.google.com")?"general":"gmail":"drive"
+}
+function execLater(a,b,c){
+    window.setTimeout(function(){a(),b&&b()},c||0)
+}
+function updateUiAfterDomLoadedForUnsupportedBrowser(){
+    window.console.log("Showing alternate UI for unsupported browser."),logImpression("Unsupported browser: updateUiAfterDomLoad()","app_load"),showEl(document.getElementById("mainScrollableContent"),!1),showEl(document.getElementById("unsupportedBrowserContent"),!0)
+}
+function maybeUpdateUiAForAppLoadFailure(a){
+    appLoadFailureUiShown||isSupportedBrowser&&(window.console.log("Showing alternate UI for app load failure."),document&&"loading"!==document.readyState&&(showEl(document.getElementById("mainScrollableContent"),!1),showEl(document.getElementById("appLoadErrorContent"),!0),document.getElementById("appLoadErrorDetails").textContent="Error details: "+a,appLoadFailureUiShown=!0,logImpression("app_load_failure","app_load",a)))}function handleDomLoaded(){try{if(domLoaded)return;if(domLoaded=!0,console.log("In handle Dom Loaded(). domLoaded: "+domLoaded+"; isSupportedBrowser: "+isSupportedBrowser),!adsenseScriptLoadError&&adLoadedDuringInit&&isSupportedBrowser||(showEl(document.getElementById("topBanner"),!1),showEl(document.getElementById("adHeading"),!1),document.getElementById("mainEditorContainer").classList.add("adjustedHeightForNoAdShown"),document.getElementById("mainScrollableContent").classList.add("adjustedHeightForNoAdShown"),document.getElementById("unsupportedBrowserContent").classList.add("adjustedHeightForNoAdShown"),document.getElementById("appLoadErrorContent").classList.add("adjustedHeightForNoAdShown"),document.getElementById("mainBackgroundSpinner").classList.add("adjustedHeightForNoAdShownBackgroundSpinner")),!isSupportedBrowser)return void updateUiAfterDomLoadedForUnsupportedBrowser();if(isAppLoadFailure)return void maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage);document.getElementById("copyright").textContent+=" v"+te.VERSION,updateUiForDevice();var a=null!=getFileId(),b=a?getReferringSource():"general";a&&"gmail"!=b&&(b="drive");var c="drive"==b,d="gmail"==b,e=!(c||d||isForDirectNew);document.getElementById("startPageIconImgDrive").removeAttribute("visibilityHidden"),showEl(document.getElementById("startPageIconImgGeneral"),e||isForDirectNew),showEl(document.getElementById("startPageIconImgGmail"),d),showEl(document.getElementById("startPageIconImgDrive"),c),showEl(document.getElementById("startPageGeneralDetails"),e),showEl(document.getElementById("startPageGmailDetails"),d),showEl(document.getElementById("startPageDriveDetails"),c),showEl(document.getElementById("startPageNewDetails"),isForDirectNew),document.getElementById("startPageDriveDetails").style.visibility="",showEl(document.getElementById("startPagePrompt"),!0),document.getElementById("startPagePrompt").style.visibility="",MAINAPP&&(MAINAPP.initAfterDomLoaded(getFileId()),EDITOR&&MAINAPP.initializeEditorAfterDomLoaded())}catch(a){throw logImpression("handle_dom_loaded_err","app_load",a),a}}function showEl(a,b){a.hidden=!b}
 function isElementShown(a){return!a.hidden}
 function logImpression(a,b,c,d,e,f){
     var g={};
@@ -13,10 +69,19 @@ function clearUrlState(){
 }
 function onAnalyticsScriptLoaded(){
     console.log("analytics_script_loaded"),analyticsLoaded=!0,adLoadedDuringInit||logImpression("AD NOT LOADED; adLoadedDuringInit=false.","app_load","reason: "+adNotLoadedReason),adsenseScriptLoadError&&!adsenseScriptLoadErrorHasBeenLogged&&(logImpression("ADSENSE SCRIPT LOAD ERROR","app_load","source: onAnalyticsScriptLoaded"),adsenseScriptLoadErrorHasBeenLogged=!0)}
-function onAdSenseScriptLoaded(){console.log("adsense_script_loaded")}
+function onAdSenseScriptLoaded(){
+    console.log("adsense_script_loaded")
+}
 function onGapiScriptLoaded(){console.log("gapi_script_loaded")}
 function onAceEditorScriptLoaded(){console.log("ace_editor_script_loaded"),aceEditorLoaded=!0,MAINAPP&&domLoaded&&MAINAPP.initializeEditorAfterDomLoaded()}
-function onJsChardetScriptLoaded(){console.log("jschardet_script_loaded"),jschardetLoaded=!0}function onMainAppScriptLoaded(){console.log("main_app_script_loaded");try{MAINAPP=new te.App,domLoaded&&MAINAPP.initAfterDomLoaded(getFileId())}catch(a){throw logImpression("main_app_bootstrap_error","app_load",a),a}
+function onJsChardetScriptLoaded(){console.log("jschardet_script_loaded"),jschardetLoaded=!0}
+function onMainAppScriptLoaded(){
+    console.log("main_app_script_loaded");
+                                 try{
+                                     MAINAPP=new te.App,domLoaded&&MAINAPP.initAfterDomLoaded(getFileId())
+                                 }catch(a){
+                                     throw logImpression("main_app_bootstrap_error","app_load",a),a
+                                 }
 function isForDirectNewFlow(){return isForDirectNew}
 function isForCreateNew(){return"create"==STATE.action&&!getFileId()}
 function isForOpen(){
