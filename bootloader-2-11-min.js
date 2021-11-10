@@ -27,7 +27,7 @@ if("phone"==deviceTypeForAdSense||"device"==deviceTypeForAdSense)adLoadedDuringI
 else 
     if(!isSupportedBrowser){
         adLoadedDuringInit=!1;
-                            var isIe11=-1!=(window.navigator.userAgent||"").indexOf("Trident/");
+        var isIe11=-1!=(window.navigator.userAgent||"").indexOf("Trident/");
         adNotLoadedReason="unsupported browser (isIe11="+isIe11+")"
     }else 
         if(!window)adLoadedDuringInit=!1,adNotLoadedReason="window object not available";
@@ -44,9 +44,11 @@ else
                 adLoadedDuringInit=!0,adNotLoadedReason="Did not detect valid referrer to parse. window.document.referrer: "+(window.document?window.document.referrer:"no_document")
     }else 
         adLoadedDuringInit=!0,adNotLoadedReason="Did not detect valid window search location to parse. window.location.search: "+(window.location?window.location.search:"no_location");
-adLoadedDuringInit&&((adsbygoogle=window.adsbygoogle||[]).push({}),adLoadedDuringInit=!0);var STATE={};isForDirectNew||(STATE=parseUrlState(),clearUrlState());
+adLoadedDuringInit&&((adsbygoogle=window.adsbygoogle||[]).push({}),adLoadedDuringInit=!0);
+var STATE={};isForDirectNew||(STATE=parseUrlState(),clearUrlState());
 function getReferringSource(){
-    var a=document&&document.referrer?document.referrer.toLowerCase():"";return-1==a.indexOf("drive.google.com")?-1==a.indexOf("mail.google.com")?"general":"gmail":"drive"
+    var a=document&&document.referrer?document.referrer.toLowerCase():"";
+    return-1==a.indexOf("drive.google.com")?-1==a.indexOf("mail.google.com")?"general":"gmail":"drive"
 }
 function execLater(a,b,c){
     window.setTimeout(function(){a(),b&&b()},c||0)
@@ -119,7 +121,8 @@ function getStateUserId(){
     return STATE.userId
 }
 function hasReferringApp(){
-    var a=getReferringAppName();return null!=a&&""!==a
+    var a=getReferringAppName();
+    return null!=a&&""!==a
 }
 function clearReferringApp(){
     STATE.referringApp=null
@@ -145,11 +148,64 @@ function getFileId(){
                 return logImpression("json_state_parse_error","app_load",a),{}
             }return a||{}
         }
-    function isUrlParamKeyPresent(a){a=a.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");var b=new RegExp("[\\?&]"+a),c=b.exec(location.search);return null!==c}function getUrlParam(a){a=a.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");var b=new RegExp("[\\?&]"+a+"=([^&#]*)"),c=b.exec(location.search);return null===c?"":decodeURIComponent(c[1].replace(/\+/g," "))}function onGapiScriptLoadError(a){handleScriptLoadError("gapi_load_error",a,"hasBeenAutoRetried: "+hasGapiScriptBeenAutoRetried),hasGapiScriptBeenAutoRetried?isForOpen()&&(isAppLoadFailure=!0,appLoadFailureMessage="gapi_load_error: "+getErrorStringFromErrorOrEvent(a),maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage)):(hasGapiScriptBeenAutoRetried=!0,loadGapiScript())}function onMainAppScriptLoadError(a){handleScriptLoadError("main_app_script_load_error","hasBeenAutoRetried: "+hasMainAppScriptBeenAutoRetried),hasMainAppScriptBeenAutoRetried?(isAppLoadFailure=!0,appLoadFailureMessage="main_app_script_load_error: "+getErrorStringFromErrorOrEvent(a),maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage)):(hasMainAppScriptBeenAutoRetried=!0,loadMainAppScript())}function onAnalyticsScriptLoadError(){handleScriptLoadError("analytics_script_load_error","hasBeenAutoRetried: "+hasAnalyticsScriptBeenAutoRetried)}function onAdSenseScriptLoadError(){adsenseScriptLoadError=!0,handleScriptLoadError("adsense_script_load_error","hasBeenAutoRetried: "+hasAdSenseScriptBeenAutoRetried),adsenseScriptLoadErrorHasBeenLogged||(logImpression("ADSENSE SCRIPT LOAD ERROR","app_load","source: onAdSenseScriptLoadError"),adsenseScriptLoadErrorHasBeenLogged=!0)}function onJsChardetScriptLoadError(){handleScriptLoadError("jschardet_script_load_error","hasBeenAutoRetried: "+hasJsChardetScriptBeenAutoRetried),hasJsChardetScriptBeenAutoRetried||(hasJsChardetScriptBeenAutoRetried=!0,loadJsChardetScript())}function onAceEditorScriptLoadError(a){handleScriptLoadError("ace_editor_script_load_error","hasBeenAutoRetried: "+hasAceEditorScriptBeenAutoRetried),hasAceEditorScriptBeenAutoRetried?(isAppLoadFailure=!0,appLoadFailureMessage="ace_editor_script_load_error: "+getErrorStringFromErrorOrEvent(a),maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage)):(hasAceEditorScriptBeenAutoRetried=!0,loadAceEditorScript())}function getErrorStringFromErrorOrEvent(a){var b="("+te.VERSION+")",c=a&&a.originalEvent?a.originalEvent instanceof Event:a instanceof Event;if(c){var d=a.message||"",e=a.filename||"",f=a.lineno||"",g=a.colno||"",h=a.error||"",i=a.target||"",j=a.type||"",k=i&&i.src?i.src:"";d&&(d=" - "+d),e&&(e=" - "+e),h&&(h=": "+h),i&&(i=" - "+i),d&&(d=" - "+d),j&&(j=" - "+j),k&&(k=" - "+k);var l=d+j+i+k+e+" @ ("+f+", "+g+")"+h;return b+l}return b+" - "+a}function handleScriptLoadError(a,b){var c=getErrorStringFromErrorOrEvent(b);console.log("Script Load Error: "+a+" - "+c),logImpression(a,"script_load_error",c,void 0,void 0,!0)}function onGapiInit(){console.log("*** onGapiInit() CALLBACK"),execLater(function(){gapi.load("auth2",initiateFirstAuth)},void 0,1)}function initiateFirstAuth(){logImpression("gapi_loaded","app_load"),authorize(!0,bindFn(handleFirstAuthSuccess,window),bindFn(handleFirstAuthError,window),getStateUserId(),void 0,!1,"initiateFirstAuth")}function handleFirstAuthSuccess(){logImpression("first_auth_success","auth"),firstAuthIsPending=!1,firstAuthSuccessful=!0,domLoaded&&MAINAPP&&(EDITOR&&MAINAPP.initializeEditorAfterDomLoaded(),MAINAPP.handleFirstAuthSuccess())}function handleFirstAuthError(a,b){var c=a||"";b&&(c+=" ("+b+")"),firstAuthIsPending=!1,firstAuthSuccessful=!1,domLoaded&&MAINAPP&&MAINAPP.handleFirstAuthError()}function authorize(a,b,c,d,e,f,g,h){h||logImpression("authorize","auth","immediate="+a+"; callingSource: "+g);var i="gapi"in window&&!!gapi.auth2&&!!gapi.auth2.authorize;if(!i)return logImpression("gapi_auth_not_ready","auth","immediate="+a+"; callingSource: "+g),void c("Error: GAPI Auth not initialized. callingSource: "+g);var j={client_id:APP_CONFIG.clientId,scope:APP_CONFIG.scopes,response_type:"token id_token"};if(a?j.prompt="none":f&&(j.prompt="select_account"),null!=d)j.login_hint=d,j.authuser=-1;else if(!f){var k=null==e?CURRENT_AUTH_USER||0:e;j.authuser=k}try{gapi.auth2.authorize(j,bindFn(handleGapiAuthResult,window,b,c))}catch(a){var l={};l.error=a,handleGapiAuthResult(b,c,l)}}function handleGapiAuthResult(a,b,c){if(!c)logImpression("auth_result","auth","(empty authResult)"),b?b(void 0):alert("Auth Required. Please reload the page.");else if(c.error){var d=c.error+(c.error_subtype?" ("+c.error_subtype+")":"");c.details&&(d+=" ["+c.details+"]"),logImpression("auth_result","auth","error: "+d),b&&b(c.error,d)}else updateAuthDetailsFromAuthResponse(c),logImpression("auth_result","auth","success. authUser: "+CURRENT_AUTH_USER),a&&a()}function bindFn(a){return a.call.apply(a.bind,arguments)}function getLoggedInUserId(){return CLAIM?CLAIM.sub:null}function updateAuthDetailsFromAuthResponse(a){ID_TOKEN=a.id_token,ACCESS_TOKEN=a.access_token,ID_TOKEN&&(CLAIM=parseJwtIdToken(ID_TOKEN));var b=0;if(a.session_state&&a.session_state.extraQueryParams){var c=a.session_state.extraQueryParams;null!=c.authuser&&(b=c.authuser)}CURRENT_AUTH_USER=b}
+    function isUrlParamKeyPresent(a){
+        a=a.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
+        var b=new RegExp("[\\?&]"+a),c=b.exec(location.search);
+        return null!==c
+    }
+    function getUrlParam(a){a=a.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
+                            var b=new RegExp("[\\?&]"+a+"=([^&#]*)"),c=b.exec(location.search);return null===c?"":decodeURIComponent(c[1].replace(/\+/g," "))
+                           }
+    function onGapiScriptLoadError(a){
+        handleScriptLoadError("gapi_load_error",a,"hasBeenAutoRetried: "+hasGapiScriptBeenAutoRetried),hasGapiScriptBeenAutoRetried?isForOpen()&&(isAppLoadFailure=!0,appLoadFailureMessage="gapi_load_error: "+getErrorStringFromErrorOrEvent(a),maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage)):(hasGapiScriptBeenAutoRetried=!0,loadGapiScript())}function onMainAppScriptLoadError(a){handleScriptLoadError("main_app_script_load_error","hasBeenAutoRetried: "+hasMainAppScriptBeenAutoRetried),hasMainAppScriptBeenAutoRetried?(isAppLoadFailure=!0,appLoadFailureMessage="main_app_script_load_error: "+getErrorStringFromErrorOrEvent(a),maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage)):(hasMainAppScriptBeenAutoRetried=!0,loadMainAppScript())
+        }
+    function onAnalyticsScriptLoadError(){
+        handleScriptLoadError("analytics_script_load_error","hasBeenAutoRetried: "+hasAnalyticsScriptBeenAutoRetried)
+    }
+    function onAdSenseScriptLoadError(){
+        adsenseScriptLoadError=!0,handleScriptLoadError("adsense_script_load_error","hasBeenAutoRetried: "+hasAdSenseScriptBeenAutoRetried),adsenseScriptLoadErrorHasBeenLogged||(logImpression("ADSENSE SCRIPT LOAD ERROR","app_load","source: onAdSenseScriptLoadError"),adsenseScriptLoadErrorHasBeenLogged=!0)
+    }
+    function onJsChardetScriptLoadError(){handleScriptLoadError("jschardet_script_load_error","hasBeenAutoRetried: "+hasJsChardetScriptBeenAutoRetried),hasJsChardetScriptBeenAutoRetried||(hasJsChardetScriptBeenAutoRetried=!0,loadJsChardetScript())
+                                         }
+    function onAceEditorScriptLoadError(a){
+        handleScriptLoadError("ace_editor_script_load_error","hasBeenAutoRetried: "+hasAceEditorScriptBeenAutoRetried),hasAceEditorScriptBeenAutoRetried?(isAppLoadFailure=!0,appLoadFailureMessage="ace_editor_script_load_error: "+getErrorStringFromErrorOrEvent(a),maybeUpdateUiAForAppLoadFailure(appLoadFailureMessage)):(hasAceEditorScriptBeenAutoRetried=!0,loadAceEditorScript())
+    }
+    function getErrorStringFromErrorOrEvent(a){
+        var b="("+te.VERSION+")",c=a&&a.originalEvent?a.originalEvent instanceof Event:a instanceof Event;
+        if(c){
+            var d=a.message||"",e=a.filename||"",f=a.lineno||"",g=a.colno||"",h=a.error||"",i=a.target||"",j=a.type||"",k=i&&i.src?i.src:"";d&&(d=" - "+d),e&&(e=" - "+e),h&&(h=": "+h),i&&(i=" - "+i),d&&(d=" - "+d),j&&(j=" - "+j),k&&(k=" - "+k);
+              var l=d+j+i+k+e+" @ ("+f+", "+g+")"+h;
+              return b+l
+             }return b+" - "+a
+    }
+    function handleScriptLoadError(a,b){
+        var c=getErrorStringFromErrorOrEvent(b);console.log("Script Load Error: "+a+" - "+c),logImpression(a,"script_load_error",c,void 0,void 0,!0)
+    }
+    function onGapiInit(){console.log("*** onGapiInit() CALLBACK"),execLater(function(){
+        gapi.load("auth2",initiateFirstAuth)
+    },void 0,1)
+                         }
+    function initiateFirstAuth(){logImpression("gapi_loaded","app_load"),authorize(!0,bindFn(handleFirstAuthSuccess,window),bindFn(handleFirstAuthError,window),getStateUserId(),void 0,!1,"initiateFirstAuth")
+                                }
+    function handleFirstAuthSuccess(){logImpression("first_auth_success","auth"),firstAuthIsPending=!1,firstAuthSuccessful=!0,domLoaded&&MAINAPP&&(EDITOR&&MAINAPP.initializeEditorAfterDomLoaded(),MAINAPP.handleFirstAuthSuccess())}function handleFirstAuthError(a,b){var c=a||"";b&&(c+=" ("+b+")"),firstAuthIsPending=!1,firstAuthSuccessful=!1,domLoaded&&MAINAPP&&MAINAPP.handleFirstAuthError()}function authorize(a,b,c,d,e,f,g,h){h||logImpression("authorize","auth","immediate="+a+"; callingSource: "+g);var i="gapi"in window&&!!gapi.auth2&&!!gapi.auth2.authorize;
+    if(!i)
+        return logImpression("gapi_auth_not_ready","auth","immediate="+a+"; callingSource: "+g),void c("Error: GAPI Auth not initialized. callingSource: "+g);var j={client_id:APP_CONFIG.clientId,scope:APP_CONFIG.scopes,response_type:"token id_token"};if(a?j.prompt="none":f&&(j.prompt="select_account"),null!=d)j.login_hint=d,j.authuser=-1;else if(!f){var k=null==e?CURRENT_AUTH_USER||0:e;j.authuser=k}try{gapi.auth2.authorize(j,bindFn(handleGapiAuthResult,window,b,c))}catch(a){var l={};l.error=a,handleGapiAuthResult(b,c,l)}}function handleGapiAuthResult(a,b,c){if(!c)logImpression("auth_result","auth","(empty authResult)"),b?b(void 0):alert("Auth Required. Please reload the page.");else if(c.error){var d=c.error+(c.error_subtype?" ("+c.error_subtype+")":"");c.details&&(d+=" ["+c.details+"]"),logImpression("auth_result","auth","error: "+d),b&&b(c.error,d)}else updateAuthDetailsFromAuthResponse(c),logImpression("auth_result","auth","success. authUser: "+CURRENT_AUTH_USER),a&&a()}function bindFn(a){return a.call.apply(a.bind,arguments)}function getLoggedInUserId(){return CLAIM?CLAIM.sub:null}function updateAuthDetailsFromAuthResponse(a){ID_TOKEN=a.id_token,ACCESS_TOKEN=a.access_token,ID_TOKEN&&(CLAIM=parseJwtIdToken(ID_TOKEN));var b=0;if(a.session_state&&a.session_state.extraQueryParams){var c=a.session_state.extraQueryParams;null!=c.authuser&&(b=c.authuser)}CURRENT_AUTH_USER=b}
 function getUserEmail(){return CLAIM?CLAIM.email:null}function getUserFullName(){return CLAIM?CLAIM.name:null}function getUserGivenName(){return CLAIM?CLAIM.given_name:null}
 function getUserPicture(){return CLAIM?CLAIM.picture:null}function getUserDomain(){return CLAIM?CLAIM.hd:null}function getAccessToken(){return ACCESS_TOKEN}
 function isTokenExpired(){return!!(CLAIM&&null!=CLAIM.exp)&&Math.round(new Date().getTime()/1e3)>CLAIM.exp}function parseJwtIdToken(a){if(!a)return{};var b=null;try{var c=a.split(".")[1],d=c.replace(/-/g,"+").replace(/_/g,"/"),e=decodeURIComponent(window.atob(d));b=JSON.parse(e)}catch(a){return logImpression("id_token_parse_error","app_load",a),{}}return b||{}}
-function isAuthorized(){return!!CLAIM}function isFirstAuthPending(){return firstAuthIsPending}function updateButtonTextHelper(a,b,c){var d=document.getElementById(a);d&&(d.childNodes[2]&&(d.childNodes[2].textContent=b),c&&(d.children[0].textContent=c))}function updateUiForDevice(){try{var a=detectDevice();("phone"==a||"device"==a)&&(updateButtonTextHelper("openFileFromDriveButton","Open From Drive"),updateButtonTextHelper("createNewTextFileButton","New File"),updateButtonTextHelper("openFileFromComputerButton","Open From Phone","smartphone"),"device"==a||"phone"==a)}catch(a){logImpression("update_ui_for_device_err","app_load",a)}}
+function isAuthorized(){
+    return!!CLAIM
+}
+function isFirstAuthPending(){
+    return firstAuthIsPending
+}
+function updateButtonTextHelper(a,b,c){
+    var d=document.getElementById(a);d&&(d.childNodes[2]&&(d.childNodes[2].textContent=b),c&&(d.children[0].textContent=c))
+}
+    function updateUiForDevice(){
+        try{
+            var a=detectDevice();
+            ("phone"==a||"device"==a)&&(updateButtonTextHelper("openFileFromDriveButton","Open From Drive"),updateButtonTextHelper("createNewTextFileButton","New File"),updateButtonTextHelper("openFileFromComputerButton","Open From Phone","smartphone"),"device"==a||"phone"==a)}catch(a){logImpression("update_ui_for_device_err","app_load",a)}}
 function maybeHandleDomLoadedOrRegister(){
     if(!document)
 throw new Error("Document not available in maybeHandleDomLoadedOrRegister()");"loading"
