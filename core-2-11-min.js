@@ -1,4 +1,5 @@
 'use strict';
+var ace = window.ace
 te.App=function(){
     this.appStateLog="",
     this.appState=te.App.APP_STATE.DEFAULT,
@@ -36,7 +37,8 @@ te.App.AUTO_TOKEN_REFRESH_INTERVAL_MILLIS=1e3*(60*te.App.AUTO_TOKEN_REFRESH_INTE
 te.App.TEXTDECODER_ASCII=new TextDecoder("ascii"),
 te.App.TEXTDECODER_UTF8=new TextDecoder("utf-8"),
 te.App.DEFAULT_PAGE_TITLE="Text Edit - Free App for Editing Text Files",
-te.App.DEFAULT_TEXT_FILENAME="Untitled.txt",te.App.DEFAULT_TEXT_FILE_EXTENSION=".txt",
+te.App.DEFAULT_TEXT_FILENAME="Untitled.txt",
+te.App.DEFAULT_TEXT_FILE_EXTENSION=".txt",
 te.App.DOCUMENT_REFERENCES=[
     "startPagePrompt",
     "startPageIconImg",
@@ -133,7 +135,110 @@ te.App.SESS_PROP.DIDPICKEXTRACTLOCATION="didPickExtractLocation",
 te.App.SESS_PROP.DIDPICKLOCALFILE="didPickLocalFile",
 te.App.SESS_PROP.DIDDRAGDROPFILE="didDragDropFile",
 te.App.SESS_PROP.DIDPICKDRIVEFILE="didPickDriveFile",
-te.App.SESS_PROP.DIDDOWNLOADSUBITEM="didDownloadSubItem",te.App.SESS_PROP.DIDOPENFILE="didOpenFile",te.App.SESS_PROP.DIDFILEOPEN="didFileOpen",te.App.SESS_PROP.DIDFILERENDER="didFileRender",te.App.SESS_PROP.DIDEXTRACTFILE="didExtractFile",te.App.SESS_PROP.DIDFILEEXTRACT="didFileExtract",te.App.SESS_PROP.DIDVIEWFILES="didViewFiles",te.App.SESS_PROP.DIDCANCELDOWNLOAD="didCancelDownload",te.App.SESS_PROP.DIDCANCELEXTRACTION="didCancelExtraction",te.App.SESS_PROP.DIDRETRYDOWNLOAD="didRetryDownload",te.App.SESS_PROP.DIDRETRYEXTRACTION="didRetryExtraction",te.App.SESS_PROP.DIDCREATEFILE="didCreateFile",te.App.SESS_PROP.DIDADDLOCALFILESTOFILE="didAddLocalFilesToFile",te.App.APP_STATE={DEFAULT:"default",INIT:"init",UNSUPPORTED_BROWSER:"unsupportedBrowser",NEW_SESSION:"newSession",PENDING_ZIP_LIBRARY_LOAD:"pendingZipLibraryLoad",APP_CREATE:"appCreate",APP_CREATED:"appCreated",APP_INIT:"appInit",ENCRYPTING_ZIP:"encryptingZip",ADD_PASSWORD_TO_ZIP:"addPasswordToZip",PASSWORD_REQUIRED:"passwordRequired",PASSWORD_INCORRECT:"passwordIncorrect",PASSWORD_VERIFIED:"passwordVerified",PASSWORD_FORMAT_NOT_SUPPORTED:"passwordFormatNotSupported",AUTH_PENDING_AUTO:"authPendingAuto",AUTH_PENDING_USER:"authPendingUser",AUTH_REQUIRED:"authRequired",AUTH_ERROR:"authError",AUTH_MISMATCH:"authMisMatch",DOWNLOADING:"downloading",DOWNLOADING_METADATA:"downloadingMetadata",CANCEL_DOWNLOAD_REQUESTED:"cancelDownloadRequested",DOWNLOAD_CANCELED:"downloadCanceled",DOWNLOAD_ALL_BYTES_TRANSFERRED:"downloadAllBytesTransferred",DOWNLOAD_FIRST_BYTE_TRANSFERRED:"downloadFirstByteTransferred",DOWNLOADED:"downloaded",DOWNLOAD_ERROR:"downloadError",ZIP_READING:"zipReading",ZIP_READ_ERROR:"zipReadError",MODEL_BUILDING:"modelBuilding",MODEL_BUILT:"modelBuilt",EXTRACTING:"extracting",EXTRACTION_COMPLETE:"extractionComplete",API_LOADED:"apiLoaded",READY_TO_EXTRACT:"readyToExtract",SESSION_CANCELED:"sessionCanceled",EXTRACTION_CANCEL_REQUESTED:"extractionCancelRequested",EXTRACTION_CANCELED:"extractionCanceled",RENDER_ZIP_UI:"renderZipUi",COMPLETE_WITH_ERRORS:"completeWithErrors",RARDECODE_LIBRARY_LOADING:"rardecodeLibraryLoading",BZIP_LIBRARY_LOADING:"bzipdecodeLibraryLoading",CREATEZIP_LIBRARY_LOADING:"createzipLibraryLoading",AESCRYPTO_LIBRARY_LOADING:"aescryptoLibraryLoading",JSCHARDET_LIBRARY_LOADING:"jschardetLibraryLoading",EDIT_ZIP:"editZip",ADDING_FILES_TO_ZIP:"addingFilesToZip",FILES_ADDED_TO_ZIP:"filesAddedToZip",ZIP_CREATION_ERROR:"zipCreationError",ZIP_CREATION_CANCELLED:"zipCreationCancelled",ZIP_ENCRYPTION_ERROR:"zipEncryptionError",ZIP_ENCRYPTION_CANCELLED:"zipEncryptionCancelled",EDITING:"editing"},te.App.ESTATE={ADDED_TO_ZIP:"addedToZip",CREATED_ZIP_SAVED_TO_DRIVE:"createdZipSavedToDrive",DEFAULT:"default",QUEUED:"queued",QUEUED_PENDING_RETRY:"queuedPendingRetry",REQUEUED_AFTER_ERROR:"requeuedAfterError",SKIPPED:"skipped",PENDING:"pending",WAITING:"waiting",CANCELED:"canceled",BEGIN_DECOMPRESSION:"beginDecompression",DECOMPRESSION_PROGRESS:"decompressionProgress",DECOMPRESSION_COMPLETE:"decompressionComplete",DECOMPRESSION_ERROR:"decompressionError",BEGIN_UPLOAD:"beginUpload",UPLOAD_PROGRESS:"uploadProgress",UPLOAD_ERROR:"uploadError",UPLOAD_ALL_BYTES_TRANSFERRED:"uploadAllBytesTransferred",UPLOAD_COMPLETE:"uploadComplete",UPLOAD_ABORTED:"uploadAborted"},te.App.SESSION_ITEM_STATE_TYPE={UPLOAD_ERROR:"uploadError",DECOMPRESSION_ERROR:"decompressionError",CANCELED:"canceled",AUTH_ERROR:"authError"},te.App.MAIN_ICON_TYPE={SECURITY:"security",INFO:"info",WARNING:"warning",ERROR:"error",SPINNER:"spinner",CANCEL:"cancel",SUCCESS:"success",TEXT:"text",UNSAVED:"unsaved",NONE:"none"},
+te.App.SESS_PROP.DIDDOWNLOADSUBITEM="didDownloadSubItem",
+te.App.SESS_PROP.DIDOPENFILE="didOpenFile",
+te.App.SESS_PROP.DIDFILEOPEN="didFileOpen",
+te.App.SESS_PROP.DIDFILERENDER="didFileRender",
+te.App.SESS_PROP.DIDEXTRACTFILE="didExtractFile",
+te.App.SESS_PROP.DIDFILEEXTRACT="didFileExtract",
+te.App.SESS_PROP.DIDVIEWFILES="didViewFiles",
+te.App.SESS_PROP.DIDCANCELDOWNLOAD="didCancelDownload",
+te.App.SESS_PROP.DIDCANCELEXTRACTION="didCancelExtraction",
+te.App.SESS_PROP.DIDRETRYDOWNLOAD="didRetryDownload",
+te.App.SESS_PROP.DIDRETRYEXTRACTION="didRetryExtraction",
+te.App.SESS_PROP.DIDCREATEFILE="didCreateFile",
+te.App.SESS_PROP.DIDADDLOCALFILESTOFILE="didAddLocalFilesToFile",
+te.App.APP_STATE={
+    DEFAULT:"default",
+    INIT:"init",
+    UNSUPPORTED_BROWSER:"unsupportedBrowser",
+    NEW_SESSION:"newSession",
+    PENDING_ZIP_LIBRARY_LOAD:"pendingZipLibraryLoad",
+    APP_CREATE:"appCreate",
+    APP_CREATED:"appCreated",
+    APP_INIT:"appInit",
+    ENCRYPTING_ZIP:"encryptingZip",
+    ADD_PASSWORD_TO_ZIP:"addPasswordToZip",
+    PASSWORD_REQUIRED:"passwordRequired",
+    PASSWORD_INCORRECT:"passwordIncorrect",
+    PASSWORD_VERIFIED:"passwordVerified",
+    PASSWORD_FORMAT_NOT_SUPPORTED:"passwordFormatNotSupported",
+    AUTH_PENDING_AUTO:"authPendingAuto",
+    AUTH_PENDING_USER:"authPendingUser",
+    AUTH_REQUIRED:"authRequired",
+    AUTH_ERROR:"authError",
+    AUTH_MISMATCH:"authMisMatch",
+    DOWNLOADING:"downloading",
+    DOWNLOADING_METADATA:"downloadingMetadata",
+    CANCEL_DOWNLOAD_REQUESTED:"cancelDownloadRequested",
+    DOWNLOAD_CANCELED:"downloadCanceled",
+    DOWNLOAD_ALL_BYTES_TRANSFERRED:"downloadAllBytesTransferred",
+    DOWNLOAD_FIRST_BYTE_TRANSFERRED:"downloadFirstByteTransferred",
+    DOWNLOADED:"downloaded",
+    DOWNLOAD_ERROR:"downloadError",
+    ZIP_READING:"zipReading",
+    ZIP_READ_ERROR:"zipReadError",
+    MODEL_BUILDING:"modelBuilding",
+    MODEL_BUILT:"modelBuilt",
+    EXTRACTING:"extracting",
+    EXTRACTION_COMPLETE:"extractionComplete",
+    API_LOADED:"apiLoaded",
+    READY_TO_EXTRACT:"readyToExtract",
+    SESSION_CANCELED:"sessionCanceled",
+    EXTRACTION_CANCEL_REQUESTED:"extractionCancelRequested",
+    EXTRACTION_CANCELED:"extractionCanceled",
+    RENDER_ZIP_UI:"renderZipUi",
+    COMPLETE_WITH_ERRORS:"completeWithErrors",
+    RARDECODE_LIBRARY_LOADING:"rardecodeLibraryLoading",
+    BZIP_LIBRARY_LOADING:"bzipdecodeLibraryLoading",
+    CREATEZIP_LIBRARY_LOADING:"createzipLibraryLoading",
+    AESCRYPTO_LIBRARY_LOADING:"aescryptoLibraryLoading",
+    JSCHARDET_LIBRARY_LOADING:"jschardetLibraryLoading",
+    EDIT_ZIP:"editZip",
+    ADDING_FILES_TO_ZIP:"addingFilesToZip",
+    FILES_ADDED_TO_ZIP:"filesAddedToZip",
+    ZIP_CREATION_ERROR:"zipCreationError",
+    ZIP_CREATION_CANCELLED:"zipCreationCancelled",
+    ZIP_ENCRYPTION_ERROR:"zipEncryptionError",
+    ZIP_ENCRYPTION_CANCELLED:"zipEncryptionCancelled",EDITING:"editing"
+},
+te.App.ESTATE={
+    ADDED_TO_ZIP:"addedToZip",
+    CREATED_ZIP_SAVED_TO_DRIVE:"createdZipSavedToDrive",
+    DEFAULT:"default",QUEUED:"queued",
+    QUEUED_PENDING_RETRY:"queuedPendingRetry",
+    REQUEUED_AFTER_ERROR:"requeuedAfterError",
+    SKIPPED:"skipped",PENDING:"pending",
+    WAITING:"waiting",
+    CANCELED:"canceled",
+    BEGIN_DECOMPRESSION:"beginDecompression",
+    DECOMPRESSION_PROGRESS:"decompressionProgress",
+    DECOMPRESSION_COMPLETE:"decompressionComplete",
+    DECOMPRESSION_ERROR:"decompressionError",
+    BEGIN_UPLOAD:"beginUpload",
+    UPLOAD_PROGRESS:"uploadProgress",
+    UPLOAD_ERROR:"uploadError",
+    UPLOAD_ALL_BYTES_TRANSFERRED:"uploadAllBytesTransferred",
+    UPLOAD_COMPLETE:"uploadComplete",UPLOAD_ABORTED:"uploadAborted"
+},
+te.App.SESSION_ITEM_STATE_TYPE={
+    UPLOAD_ERROR:"uploadError",
+    DECOMPRESSION_ERROR:"decompressionError",
+    CANCELED:"canceled",
+    AUTH_ERROR:"authError"
+},
+te.App.MAIN_ICON_TYPE={
+    SECURITY:"security",
+    INFO:"info",
+    WARNING:"warning",
+    ERROR:"error",
+    SPINNER:"spinner",
+    CANCEL:"cancel",
+    SUCCESS:"success",
+    TEXT:"text",
+    UNSAVED:"unsaved",
+    NONE:"none"
+},
 te.App.NAME="Text Edit",
 te.App.EXTRACTED_FOLDER_SUFFIX="(Unzipped Files)",
 te.App.FILE_EXTENSION_REGEX="/\\.[^/.]+$/",
@@ -163,11 +268,13 @@ te.App.trimFileExtension=function(e){
     return e.replace(te.App.FILE_EXTENSION_REGEX,"")
 },
 te.App.getFileExtension=function(e){
-    if(null==e)return null;var t=e.trim().split(".");
+    if(null==e)return null;
+    var t=e.trim().split(".");
     return 1==t.length?"":t.pop().toLowerCase().trim()
 },
 te.App.trimLastFileExtension=function(e){
-    var t=e.split(".");return 1==t.length?e:(t.pop(),t.join("."))
+    var t=e.split(".");
+    return 1==t.length?e:(t.pop(),t.join("."))
 },
 te.App.execLater=function(e,t,o){
     window.setTimeout(function(){
@@ -175,20 +282,42 @@ te.App.execLater=function(e,t,o){
     },o||0)
 },
 te.App.prototype.initAfterDomLoaded=function(e){
-    this.isInitialized||(this.isInitialized=!0,
-    this.fileIdToOpen=e,this.addDocumentReferences(),this.addEventListeners(),logImpression("app_initialized - initAfterDomLoaded()","app_load",te.VERSION),this.startSessionAfterInit())
+    this.isInitialized||(
+        this.isInitialized=!0,
+        this.fileIdToOpen=e,
+        this.addDocumentReferences(),
+        this.addEventListeners(),
+        logImpression("app_initialized - initAfterDomLoaded()","app_load",te.VERSION),
+        this.startSessionAfterInit()
+    )
 },
 te.App.prototype.startSessionAfterInit=function(){if(isAuthorized()&&(this.updateUserInfoUi(),this.maybeEnableAutoRefreshTokenTimer()),this.fileIdToOpen)isAuthorized()?this.maybeDownloadAfterAuth():isFirstAuthPending()||this.updateStartPageButtons();else if(isFirstAuthPending());else{var e=this.maybeProceedWithDirectNewFlow();e||(this.updateStartPageButtons(),this.startNewManualSession())}},
 te.App.prototype.maybeProceedWithDirectNewFlow=function(){return!this.hasAutoProceededWithDirectNewFlow&&!!isForDirectNewFlow()&&(this.hasAutoProceededWithDirectNewFlow=!0,logImpression("create_new_text_file_direct_new","create_new_text_file"),
 this.doCreateNewEmptyTextFile(),!0)},
-te.App.prototype.initializeEditorAfterDomLoaded=function(){if(!this.isEditorInitialized){this.isEditorInitialized=!0,console.log("TEXT EDITOR: initializeEditor()"),
-EDITOR=ace.edit("mainEditor"),EDITOR.setTheme("ace/theme/chrome"),EDITOR.session.setMode("ace/mode/text"),
-EDITOR.setOption("showLineNumbers",!0),EDITOR.setOption("showGutter",!0),EDITOR.setOption("showPrintMargin",!1),EDITOR.setOption("wrap",!0),EDITOR.setOption("scrollPastEnd",.5),EDITOR.session.setOption("indentedSoftWrap",!1),
-EDITOR.getSession().setOption("tabSize",4),
-EDITOR.setOption("useSoftTabs",!0),EDITOR.setOption("showInvisibles",!1),
-EDITOR.setReadOnly(!0),EDITOR.setFontSize(16);
+te.App.prototype.initializeEditorAfterDomLoaded=function(){
+    if(!this.isEditorInitialized){
+        this.isEditorInitialized=!0,
+        console.log("TEXT EDITOR: initializeEditor()"),
+        EDITOR=ace.edit("mainEditor"),
+        EDITOR.setTheme("ace/theme/chrome"),
+        EDITOR.session.setMode("ace/mode/text"),
+        EDITOR.setOption("showLineNumbers",!0),EDITOR.setOption("showGutter",!0),EDITOR.setOption("showPrintMargin",!1),EDITOR.setOption("wrap",!0),EDITOR.setOption("scrollPastEnd",.5),EDITOR.session.setOption("indentedSoftWrap",!1),
+        EDITOR.getSession().setOption("tabSize",4),
+        EDITOR.setOption("useSoftTabs",!0),
+        EDITOR.setOption("showInvisibles",!1),
+        EDITOR.setReadOnly(!0),
+        EDITOR.setFontSize(16);
 var e=this;
-EDITOR.on("input",function(){var t=EDITOR.getSession().getUndoManager();e.enableEl(e.redoButton,t.hasRedo()),e.enableEl(e.undoButton,t.hasUndo()),t.isClean()?(e.driveFileId?(e.actionStatusLabel.textContent="Saved",e.setMainIcon(te.App.MAIN_ICON_TYPE.SUCCESS)):(e.actionStatusLabel.textContent="",e.setMainIcon(te.App.MAIN_ICON_TYPE.NONE)),e.enableEl(e.saveToDriveButton,!1)):(e.actionStatusLabel.textContent="Unsaved changes",e.setMainIcon(te.App.MAIN_ICON_TYPE.UNSAVED),e.enableEl(e.saveToDriveButton,!0))}),null!=this.cachedDecodedText&&(EDITOR.session.setValue(this.cachedDecodedText),EDITOR.session.getUndoManager().reset(),EDITOR.session.getUndoManager().markClean(),this.cachedDecodedText=null),EDITOR.commands.addCommand({name:"save",bindKey:{win:"Ctrl-S",mac:"Command-S"},exec:function(){e.isElementEnabled(e.saveToDriveButton)&&e.handleSaveToDriveButtonClick()}}),EDITOR.commands.addCommand({name:"open",bindKey:{win:"Ctrl-O",mac:"Command-O"},exec:function(){e.handleOpenFileFromDriveButtonClick()}}),EDITOR.commands.addCommand({name:"print",bindKey:{win:"Ctrl-P",mac:"Command-P"},exec:function(){e.handlePrintButtonClick()}}),te.App.execLater(function(){EDITOR.resize(),e.maybeEnableEditor(),e.focusEditor()})}},te.App.prototype.getSource=function(){var e=null==this.fileIdToOpen?"general":getReferringSource();return null!=this.fileIdToOpen&&"gmail"!=e&&"zipextractor"!=e&&(e="drive"),e},te.App.prototype.enableEditor=function(){this.isEditorLoaded()&&EDITOR.setReadOnly(!1)},te.App.prototype.maybeEnableEditor=function(){var e=this.getSource();"drive"==e||"gmail"==e||"zipextractor"==e||this.enableEditor()},te.App.prototype.checkStateUserAndLoggedInUserMatch=function(){var e=getLoggedInUserId();if(null==e)return!1;var t=getStateUserId();return!(null!=t)||!("{userId}"!=t)||t==e},te.App.prototype.handleStateUserIdMismatchError=function(){logImpression("auth_account_mismatch","auth","authUser: "+CURRENT_AUTH_USER),
+EDITOR.on("input",function(){
+    var t=EDITOR.getSession().getUndoManager();
+    e.enableEl(e.redoButton,t.hasRedo()),
+    e.enableEl(e.undoButton,t.hasUndo()),
+    t.isClean()?(e.driveFileId?(e.actionStatusLabel.textContent="Saved",
+    e.setMainIcon(te.App.MAIN_ICON_TYPE.SUCCESS)):(e.actionStatusLabel.textContent="",
+    e.setMainIcon(te.App.MAIN_ICON_TYPE.NONE)),
+    e.enableEl(e.saveToDriveButton,!1)):(e.actionStatusLabel.textContent="Unsaved changes",
+    e.setMainIcon(te.App.MAIN_ICON_TYPE.UNSAVED),e.enableEl(e.saveToDriveButton,!0))
+}),null!=this.cachedDecodedText&&(EDITOR.session.setValue(this.cachedDecodedText),EDITOR.session.getUndoManager().reset(),EDITOR.session.getUndoManager().markClean(),this.cachedDecodedText=null),EDITOR.commands.addCommand({name:"save",bindKey:{win:"Ctrl-S",mac:"Command-S"},exec:function(){e.isElementEnabled(e.saveToDriveButton)&&e.handleSaveToDriveButtonClick()}}),EDITOR.commands.addCommand({name:"open",bindKey:{win:"Ctrl-O",mac:"Command-O"},exec:function(){e.handleOpenFileFromDriveButtonClick()}}),EDITOR.commands.addCommand({name:"print",bindKey:{win:"Ctrl-P",mac:"Command-P"},exec:function(){e.handlePrintButtonClick()}}),te.App.execLater(function(){EDITOR.resize(),e.maybeEnableEditor(),e.focusEditor()})}},te.App.prototype.getSource=function(){var e=null==this.fileIdToOpen?"general":getReferringSource();return null!=this.fileIdToOpen&&"gmail"!=e&&"zipextractor"!=e&&(e="drive"),e},te.App.prototype.enableEditor=function(){this.isEditorLoaded()&&EDITOR.setReadOnly(!1)},te.App.prototype.maybeEnableEditor=function(){var e=this.getSource();"drive"==e||"gmail"==e||"zipextractor"==e||this.enableEditor()},te.App.prototype.checkStateUserAndLoggedInUserMatch=function(){var e=getLoggedInUserId();if(null==e)return!1;var t=getStateUserId();return!(null!=t)||!("{userId}"!=t)||t==e},te.App.prototype.handleStateUserIdMismatchError=function(){logImpression("auth_account_mismatch","auth","authUser: "+CURRENT_AUTH_USER),
 this.setAppState(te.App.APP_STATE.AUTH_MISMATCH)},
 te.App.prototype.handleFirstAuthError=function(){this.setMainIcon(te.App.MAIN_ICON_TYPE.NONE);var e=this.maybeProceedWithDirectNewFlow();
 e||this.updateStartPageButtons()},
