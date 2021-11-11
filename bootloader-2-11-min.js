@@ -10,7 +10,9 @@ function isBrowserIE11OrOlder(){
         return console.log("error during detection of browser: "+a),!0
     }
 }
-var isSupportedBrowser=!isBrowserIE11OrOlder(),adsbygoogle=null,dataLayer=null;window.dataLayer=window.dataLayer||[],dataLayer=window.dataLayer;
+var isSupportedBrowser=!isBrowserIE11OrOlder(),adsbygoogle=null,dataLayer=null;
+window.dataLayer=window.dataLayer||[],
+dataLayer=window.dataLayer;
 function gtag(){
     dataLayer.push(arguments)
 }
@@ -147,7 +149,8 @@ function getFileId(){
                 a=JSON.parse(b)
             }catch(a){
                 return logImpression("json_state_parse_error","app_load",a),{}
-            }return a||{}
+            }
+            return a||{}
         }
     function isUrlParamKeyPresent(a){
         a=a.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");
@@ -213,4 +216,36 @@ throw new Error("Document not available in maybeHandleDomLoadedOrRegister()");"l
 document.readyState?(console.log("maybeHandleDomLoadedOrRegister(): DOM not yet ready, registering."),
 document.addEventListener("DOMContentLoaded",function(){handleDomLoaded()})):(console.log("maybeHandleDomLoadedOrRegister(): DOM already loaded."),handleDomLoaded())}
 window.onerror=function(a,b,c,d,e){try{var f=e&&e.stack?e.stack:"",g="("+te.VERSION+") - "+b+" @ ("+c+", "+d+"): "+f;window.console.log("Unhandled Text Editor App Error -"+a+": "+f),logImpression(a,"unhandled_js_error",g,void 0,void 0,!0)}catch(b){window.console.log("*** Unhandled App Error: "+a+" - "+b)}};
-function loadScript(a,b,c){var d=document.createElement("script");d.type="text/javascript",d.onload=function(){b&&b()},d.onerror=function(a){c&&c(a)},d.src=a,console.log("LOAD SCRIPT: "+a);try{document.head.appendChild(d)}catch(a){c(a)}}maybeHandleDomLoadedOrRegister();function loadGapiScript(){loadScript("https://apis.google.com/js/api.js?onload=onGapiInit",bindFn(onGapiScriptLoaded),bindFn(onGapiScriptLoadError))}function loadMainAppScript(){loadScript("core-2-"+APP_MINOR_VERSION+APP_REVISION+(APP_IS_MINIFIED_RELEASE?"-min":"")+".js",bindFn(onMainAppScriptLoaded),bindFn(onMainAppScriptLoadError))}function loadAnalyticsScript(){loadScript("https://www.googletagmanager.com/gtag/js?id="+APP_GOOGLE_ANALYTICS_ID,bindFn(onAnalyticsScriptLoaded),bindFn(onAnalyticsScriptLoadError))}function loadAdSenseScript(){loadScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",bindFn(onAdSenseScriptLoaded),bindFn(onAdSenseScriptLoadError))}function loadAceEditorScript(){loadScript("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",bindFn(onAceEditorScriptLoaded),bindFn(onAceEditorScriptLoadError))}function loadJsChardetScript(){loadScript("https://cdnjs.cloudflare.com/ajax/libs/jschardet/2.1.1/jschardet.min.js",bindFn(onJsChardetScriptLoaded),bindFn(onJsChardetScriptLoadError))}isSupportedBrowser?(loadGapiScript(),loadMainAppScript(),loadAnalyticsScript(),loadAceEditorScript(),loadJsChardetScript(),true?loadAdSenseScript():console.log("Skipping AdSense load.")):(logImpression("Unsupported browser: Skipping Script Load.","app_load"),window.console.log("Skipping loading additional scripts for unsupported browser."));
+function loadScript(a,b,c){
+    var d=document.createElement("script");
+    d.type="text/javascript",
+    d.onload=function(){b&&b()},
+        d.onerror=function(a){c&&c(a)},
+        d.src=a,console.log("LOAD SCRIPT: "+a);
+    try{document.head.appendChild(d)
+       }catch(a){c(a)}}maybeHandleDomLoadedOrRegister();
+    function loadGapiScript(){
+        loadScript("https://apis.google.com/js/api.js?onload=onGapiInit",bindFn(onGapiScriptLoaded),
+        bindFn(onGapiScriptLoadError))
+    }
+    function loadMainAppScript(){
+        loadScript("core-2-"+APP_MINOR_VERSION+APP_REVISION+(APP_IS_MINIFIED_RELEASE?"-min":"")+".js",
+        bindFn(onMainAppScriptLoaded),
+        bindFn(onMainAppScriptLoadError))
+    }
+    function loadAnalyticsScript(){
+        loadScript("https://www.googletagmanager.com/gtag/js?id="+APP_GOOGLE_ANALYTICS_ID,
+                   bindFn(onAnalyticsScriptLoaded),
+                   bindFn(onAnalyticsScriptLoadError))
+    }
+    function loadAdSenseScript(){
+        loadScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+                   bindFn(onAdSenseScriptLoaded),bindFn(onAdSenseScriptLoadError))
+    }function loadAceEditorScript(){
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",
+        bindFn(onAceEditorScriptLoaded),
+        bindFn(onAceEditorScriptLoadError))
+    }function loadJsChardetScript(){
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/jschardet/2.1.1/jschardet.min.js",
+                   bindFn(onJsChardetScriptLoaded),bindFn(onJsChardetScriptLoadError))
+    }isSupportedBrowser?(loadGapiScript(),loadMainAppScript(),loadAnalyticsScript(),loadAceEditorScript(),loadJsChardetScript(),true?loadAdSenseScript():console.log("Skipping AdSense load.")):(logImpression("Unsupported browser: Skipping Script Load.","app_load"),window.console.log("Skipping loading additional scripts for unsupported browser."));
