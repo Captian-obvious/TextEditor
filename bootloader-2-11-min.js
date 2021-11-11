@@ -3,7 +3,8 @@ var APP_MAJOR_VERSION=2,APP_MINOR_VERSION=11,APP_REVISION="",APP_IS_MINIFIED_REL
 function isBrowserIE11OrOlder(){
     try{
         var a=window.navigator.userAgent,b=a.indexOf("MSIE ");
-        if(0<b)return!0;var c=a.indexOf("Trident/");
+        if(0<b)return!0;
+        var c=a.indexOf("Trident/");
         return!!(0<c)
     }catch(a){
         return console.log("error during detection of browser: "+a),!0
