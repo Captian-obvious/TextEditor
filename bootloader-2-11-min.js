@@ -234,7 +234,7 @@ function loadScript(a,b,c){
         bindFn(onMainAppScriptLoadError))
     }
     function loadAnalyticsScript(){
-        loadScript("https://www.googletagmanager.com/gtag/js?id="+APP_GOOGLE_ANALYTICS_ID,
+        loadScript("https://www.googletagmanager.com/gtag/js?id=UA-74999669-1",
                    bindFn(onAnalyticsScriptLoaded),
                    bindFn(onAnalyticsScriptLoadError))
     }
