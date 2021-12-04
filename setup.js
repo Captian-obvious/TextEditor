@@ -1,7 +1,4 @@
 var ace = window.ace
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.session.setMode("ace/mode/javascript");
 var app = document.getElementById('app')
 window.addEventListener('load',function(){
     app.innerHTML = `
@@ -11,4 +8,7 @@ window.addEventListener('load',function(){
     return x;
     }</div>
     `
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/chrome");
+    editor.session.setMode("ace/mode/javascript");
 });
