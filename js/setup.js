@@ -1,5 +1,12 @@
 const ace = window.ace
 window.te = {};
+window.te.require = function(src) {
+    var head = document.getElementsByTagName ("head")[0];
+    var script = document.createElement ("script");
+    script.type="text/javascript";
+    script.src = src;
+    head.appendChild (script);
+};
 window.addEventListener('load', function() {
     var container = document.getElementById('app');
     container.innerHTML = `
