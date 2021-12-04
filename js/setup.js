@@ -1,6 +1,5 @@
 const ace = window.ace
-var te = {};
-
+window.te = {};
 window.addEventListener('load', function() {
     var container = document.getElementById('app');
     container.innerHTML = `
@@ -10,10 +9,6 @@ window.addEventListener('load', function() {
     return x;
     }</div>
     `
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/chrome");
-    te.theme = "ace/theme/chrome";
-    editor.session.setMode("ace/mode/javascript");
-    te.mode = "Javascript";
-    te.mainMenu = {};
+    window.te.theme = "ace/theme/chrome";
+    window.te.mode = "ace/mode/text";
 });
