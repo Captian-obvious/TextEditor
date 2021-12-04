@@ -18,4 +18,5 @@ window.addEventListener('load', function() {
     `
     window.te.theme = "ace/theme/chrome";
     window.te.mode = "ace/mode/text";
+    window.te.require('../js/core.js');
 });
