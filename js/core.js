@@ -613,7 +613,7 @@ function overlayPage (contentElement, top, right, bottom, left) {
         left = '';
     }
 
-    cl.src = '/famfamfam_silk_icons_v013/icons/cross.png';
+    cl.src = '/famfamfam_silk_icons_v013/icons/cross.svg';
     cl.style.cssText = 'margin: 5px 5px 0 0; padding: 0; ' +
         'float: right; width: 25px;';
     div.style.cssText = 'margin:0; padding:0; position: absolute;' +
