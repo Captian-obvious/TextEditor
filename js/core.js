@@ -210,7 +210,7 @@ function addEditorMenuOptions (editor) {
                 "innerHTML" : "c_cpp",
                 "value" : "ace/mode/c_cpp"
             }, {
-                "innerHTML" : "dart"
+                "innerHTML" : "dart",
                 "value" : "ace/mode/dart"
             }, {
                 "innerHTML" : "diff",
