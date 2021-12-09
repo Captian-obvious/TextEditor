@@ -6,13 +6,6 @@ const ace = window.ace;
     browser: true,
     vars: true
 */
-/*global
-    getComputedStyle
-*/
-/**
- * These functions are necessary for the settings menu
- * to provide a couple really useful settings.
- */
 function addFunctionsForSettingsMenu (editor) {
     // when building the settings menu matching get and set functions
     // must be found or the function will be ignored
@@ -98,309 +91,309 @@ function addEditorMenuOptions (editor) {
             }
         ],
         "setTheme" : [{
-                "textContent" : "ambiance",
+                "innerHTML" : "ambiance",
                 "value" : "ace/theme/ambiance"
             }, {
-                "textContent" : "chaos",
+                "innerHTML" : "chaos",
                 "value" : "ace/theme/chaos"
             }, {
-                "textContent" : "chrome",
+                "innerHTML" : "chrome",
                 "value" : "ace/theme/chrome"
             }, {
-                "textContent" : "clouds",
+                "innerHTML" : "clouds",
                 "value" : "ace/theme/clouds"
             }, {
-                "textContent" : "clouds_midnight",
+                "innerHTML" : "clouds_midnight",
                 "value" : "ace/theme/clouds_midnight"
             }, {
-                "textContent" : "cobalt",
+                "innerHTML" : "cobalt",
                 "value" : "ace/theme/cobalt"
             }, {
-                "textContent" : "crimson_editor",
+                "innerHTML" : "crimson_editor",
                 "value" : "ace/theme/crimson_editor"
             }, {
-                "textContent" : "dawn",
+                "innerHTML" : "dawn",
                 "value" : "ace/theme/dawn"
             }, {
-                "textContent" : "dreamweaver",
+                "innerHTML" : "dreamweaver",
                 "value" : "ace/theme/dreamweaver"
             }, {
-                "textContent" : "eclipse",
+                "innerHTML" : "eclipse",
                 "value" : "ace/theme/eclipse"
             }, {
-                "textContent" : "github",
+                "innerHTML" : "github",
                 "value" : "ace/theme/github"
             }, {
-                "textContent" : "idle_fingers",
+                "innerHTML" : "idle_fingers",
                 "value" : "ace/theme/idle_fingers"
             }, {
-                "textContent" : "kr",
+                "innerHTML" : "kr",
                 "value" : "ace/theme/kr"
             }, {
-                "textContent" : "merbivore",
+                "innerHTML" : "merbivore",
                 "value" : "ace/theme/merbivore"
             }, {
-                "textContent" : "merbivore_soft",
+                "innerHTML" : "merbivore_soft",
                 "value" : "ace/theme/merbivore_soft"
             }, {
-                "textContent" : "monokai",
+                "innerHTML" : "monokai",
                 "value" : "ace/theme/monokai"
             }, {
-                "textContent" : "mono_industrial",
+                "innerHTML" : "mono_industrial",
                 "value" : "ace/theme/mono_industrial"
             }, {
-                "textContent" : "pastel_on_dark",
+                "innerHTML" : "pastel_on_dark",
                 "value" : "ace/theme/pastel_on_dark"
             }, {
-                "textContent" : "solarized_dark",
+                "innerHTML" : "solarized_dark",
                 "value" : "ace/theme/solarized_dark"
             }, {
-                "textContent" : "solarized_light",
+                "innerHTML" : "solarized_light",
                 "value" : "ace/theme/solarized_light"
             }, {
-                "textContent" : "textmate",
+                "innerHTML" : "textmate",
                 "value" : "ace/theme/textmate"
             }, {
-                "textContent" : "tomorrow",
+                "innerHTML" : "tomorrow",
                 "value" : "ace/theme/tomorrow"
             }, {
-                "textContent" : "tomorrow_night",
+                "innerHTML" : "tomorrow_night",
                 "value" : "ace/theme/tomorrow_night"
             }, {
-                "textContent" : "tomorrow_night_blue",
+                "innerHTML" : "tomorrow_night_blue",
                 "value" : "ace/theme/tomorrow_night_blue"
             }, {
-                "textContent" : "tomorrow_night_bright",
+                "innerHTML" : "tomorrow_night_bright",
                 "value" : "ace/theme/tomorrow_night_bright"
             }, {
-                "textContent" : "tomorrow_night_eighties",
+                "innerHTML" : "tomorrow_night_eighties",
                 "value" : "ace/theme/tomorrow_night_eighties"
             }, {
-                "textContent" : "twilight",
+                "innerHTML" : "twilight",
                 "value" : "ace/theme/twilight"
             }, {
-                "textContent" : "vibrant_ink",
+                "innerHTML" : "vibrant_ink",
                 "value" : "ace/theme/vibrant_ink"
             }, {
-                "textContent" : "xcode",
+                "innerHTML" : "xcode",
                 "value" : "ace/theme/xcode"
             }
         ],
         "setMode" : [{
-                "textContent" : "abap",
+                "innerHTML" : "abap",
                 "value" : "ace/mode/abap"
             }, {
-                "textContent" : "asciidoc",
+                "innerHTML" : "asciidoc",
                 "value" : "ace/mode/asciidoc"
             }, {
-                "textContent" : "c9search",
+                "innerHTML" : "c9search",
                 "value" : "ace/mode/c9search"
             }, {
-                "textContent" : "clojure",
+                "innerHTML" : "clojure",
                 "value" : "ace/mode/clojure"
             }, {
-                "textContent" : "coffee",
+                "innerHTML" : "coffee",
                 "value" : "ace/mode/coffee"
             }, {
-                "textContent" : "coldfusion",
+                "innerHTML" : "coldfusion",
                 "value" : "ace/mode/coldfusion"
             }, {
-                "textContent" : "csharp",
+                "innerHTML" : "csharp",
                 "value" : "ace/mode/csharp"
             }, {
-                "textContent" : "css",
+                "innerHTML" : "css",
                 "value" : "ace/mode/css"
             }, {
-                "textContent" : "curly",
+                "innerHTML" : "curly",
                 "value" : "ace/mode/curly"
             }, {
-                "textContent" : "c_cpp",
+                "innerHTML" : "c_cpp",
                 "value" : "ace/mode/c_cpp"
             }, {
-                "textContent" : "dart",
+                "innerHTML" : "dart"
                 "value" : "ace/mode/dart"
             }, {
-                "textContent" : "diff",
+                "innerHTML" : "diff",
                 "value" : "ace/mode/diff"
             }, {
-                "textContent" : "django",
+                "innerHTML" : "django",
                 "value" : "ace/mode/django"
             }, {
-                "textContent" : "dot",
+                "innerHTML" : "dot",
                 "value" : "ace/mode/dot"
             }, {
-                "textContent" : "ftl",
+                "innerHTML" : "ftl",
                 "value" : "ace/mode/ftl"
             }, {
-                "textContent" : "glsl",
+                "innerHTML" : "glsl",
                 "value" : "ace/mode/glsl"
             }, {
-                "textContent" : "golang",
+                "innerHTML" : "golang",
                 "value" : "ace/mode/golang"
             }, {
-                "textContent" : "groovy",
+                "innerHTML" : "groovy",
                 "value" : "ace/mode/groovy"
             }, {
-                "textContent" : "haml",
+                "innerHTML" : "haml",
                 "value" : "ace/mode/haml"
             }, {
-                "textContent" : "haxe",
+                "innerHTML" : "haxe",
                 "value" : "ace/mode/haxe"
             }, {
-                "textContent" : "html",
+                "innerHTML" : "html",
                 "value" : "ace/mode/html"
             }, {
-                "textContent" : "jade",
+                "innerHTML" : "jade",
                 "value" : "ace/mode/jade"
             }, {
-                "textContent" : "java",
+                "innerHTML" : "java",
                 "value" : "ace/mode/java"
             }, {
-                "textContent" : "javascript",
+                "innerHTML" : "javascript",
                 "value" : "ace/mode/javascript"
             }, {
-                "textContent" : "json",
+                "innerHTML" : "json",
                 "value" : "ace/mode/json"
             }, {
-                "textContent" : "jsp",
+                "innerHTML" : "jsp",
                 "value" : "ace/mode/jsp"
             }, {
-                "textContent" : "jsx",
+                "innerHTML" : "jsx",
                 "value" : "ace/mode/jsx"
             }, {
-                "textContent" : "latex",
+                "innerHTML" : "latex",
                 "value" : "ace/mode/latex"
             }, {
-                "textContent" : "less",
+                "innerHTML" : "less",
                 "value" : "ace/mode/less"
             }, {
-                "textContent" : "liquid",
+                "innerHTML" : "liquid",
                 "value" : "ace/mode/liquid"
             }, {
-                "textContent" : "lisp",
+                "innerHTML" : "lisp",
                 "value" : "ace/mode/lisp"
             }, {
-                "textContent" : "livescript",
+                "innerHTML" : "livescript",
                 "value" : "ace/mode/livescript"
             }, {
-                "textContent" : "logiql",
+                "innerHTML" : "logiql",
                 "value" : "ace/mode/logiql"
             }, {
-                "textContent" : "lsl",
+                "innerHTML" : "lsl",
                 "value" : "ace/mode/lsl"
             }, {
-                "textContent" : "lua",
+                "innerHTML" : "lua",
                 "value" : "ace/mode/lua"
             }, {
-                "textContent" : "luapage",
+                "innerHTML" : "luapage",
                 "value" : "ace/mode/luapage"
             }, {
-                "textContent" : "lucene",
+                "innerHTML" : "lucene",
                 "value" : "ace/mode/lucene"
             }, {
-                "textContent" : "makefile",
+                "innerHTML" : "makefile",
                 "value" : "ace/mode/makefile"
             }, {
-                "textContent" : "markdown",
+                "innerHTML" : "markdown",
                 "value" : "ace/mode/markdown"
             }, {
-                "textContent" : "objectivec",
+                "innerHTML" : "objectivec",
                 "value" : "ace/mode/objectivec"
             }, {
-                "textContent" : "ocaml",
+                "innerHTML" : "ocaml",
                 "value" : "ace/mode/ocaml"
             }, {
-                "textContent" : "pascal",
+                "innerHTML" : "pascal",
                 "value" : "ace/mode/pascal"
             }, {
-                "textContent" : "perl",
+                "innerHTML" : "perl",
                 "value" : "ace/mode/perl"
             }, {
-                "textContent" : "pgsql",
+                "innerHTML" : "pgsql",
                 "value" : "ace/mode/pgsql"
             }, {
-                "textContent" : "php",
+                "innerHTML" : "php",
                 "value" : "ace/mode/php"
             }, {
-                "textContent" : "powershell",
+                "innerHTML" : "powershell",
                 "value" : "ace/mode/powershell"
             }, {
-                "textContent" : "python",
+                "innerHTML" : "python",
                 "value" : "ace/mode/python"
             }, {
-                "textContent" : "r",
+                "innerHTML" : "r",
                 "value" : "ace/mode/r"
             }, {
-                "textContent" : "rdoc",
+                "innerHTML" : "rdoc",
                 "value" : "ace/mode/rdoc"
             }, {
-                "textContent" : "rhtml",
+                "innerHTML" : "rhtml",
                 "value" : "ace/mode/rhtml"
             }, {
-                "textContent" : "ruby",
+                "innerHTML" : "ruby",
                 "value" : "ace/mode/ruby"
             }, {
-                "textContent" : "sass",
+                "innerHTML" : "sass",
                 "value" : "ace/mode/sass"
             }, {
-                "textContent" : "scad",
+                "innerHTML" : "scad",
                 "value" : "ace/mode/scad"
             }, {
-                "textContent" : "scala",
+                "innerHTML" : "scala",
                 "value" : "ace/mode/scala"
             }, {
-                "textContent" : "scheme",
+                "innerHTML" : "scheme",
                 "value" : "ace/mode/scheme"
             }, {
-                "textContent" : "scss",
+                "innerHTML" : "scss",
                 "value" : "ace/mode/scss"
             }, {
-                "textContent" : "sh",
+                "innerHTML" : "sh",
                 "value" : "ace/mode/sh"
             }, {
-                "textContent" : "sql",
+                "innerHTML" : "sql",
                 "value" : "ace/mode/sql"
             }, {
-                "textContent" : "stylus",
+                "innerHTML" : "stylus",
                 "value" : "ace/mode/stylus"
             }, {
-                "textContent" : "svg",
+                "innerHTML" : "svg",
                 "value" : "ace/mode/svg"
             }, {
-                "textContent" : "tcl",
+                "innerHTML" : "tcl",
                 "value" : "ace/mode/tcl"
             }, {
-                "textContent" : "tex",
+                "innerHTML" : "tex",
                 "value" : "ace/mode/tex"
             }, {
-                "textContent" : "text",
+                "innerHTML" : "text",
                 "value" : "ace/mode/text"
             }, {
-                "textContent" : "textile",
+                "innerHTML" : "textile",
                 "value" : "ace/mode/textile"
             }, {
-                "textContent" : "tmsnippet",
+                "innerHTML" : "tmsnippet",
                 "value" : "ace/mode/tmsnippet"
             }, {
-                "textContent" : "tm_snippet",
+                "innerHTML" : "tm_snippet",
                 "value" : "ace/mode/tm_snippet"
             }, {
-                "textContent" : "toml",
+                "innerHTML" : "toml",
                 "value" : "ace/mode/toml"
             }, {
-                "textContent" : "typescript",
+                "innerHTML" : "typescript",
                 "value" : "ace/mode/typescript"
             }, {
-                "textContent" : "vbscript",
+                "innerHTML" : "vbscript",
                 "value" : "ace/mode/vbscript"
             }, {
-                "textContent" : "xml",
+                "innerHTML" : "xml",
                 "value" : "ace/mode/xml"
             }, {
-                "textContent" : "xquery",
+                "innerHTML" : "xquery",
                 "value" : "ace/mode/xquery"
             }, {
-                "textContent" : "yaml",
+                "innerHTML" : "yaml",
                 "value" : "ace/mode/yaml"
             }
         ]
