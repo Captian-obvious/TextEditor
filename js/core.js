@@ -648,8 +648,9 @@ window.addEventListener('load', function() {
     return x;
     };</div>
     `
+    var settings = document.getElementById("settings");
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/chrome");
     editor.session.setMode("ace/mode/javascript");
-    aceShowSettings(editor)
+    settings.onclick = aceShowSettingsMenu(editor)
 });
