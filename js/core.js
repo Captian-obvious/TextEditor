@@ -615,7 +615,7 @@ function overlayPage (contentElement, top, right, bottom, left) {
     div.appendChild(cl);
     div.id = "Menu2"
     div.appendChild(contentContainer);
-    document.getElementById("menu").appendChild(div);
+    document.body.appendChild(div);
 
     cl.addEventListener('click', function (e) {
         div.parentNode.removeChild(div);
