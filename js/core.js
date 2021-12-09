@@ -18,7 +18,7 @@ function addFunctionsForSettingsMenu (editor) {
     // must be found or the function will be ignored
 
     editor.getFontSize = function () {
-        return editor.container.style;
+        return window.getComputedStyle(editor.container).getPropertyValue('font-size');
     };
 
     // this allows the settings menu to supply a wrap limit
