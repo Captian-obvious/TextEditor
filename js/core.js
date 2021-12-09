@@ -498,7 +498,7 @@ function generateMenu (editor) {
         } else {
             el = createInput(item, val, clss);
             el.addEventListener('blur', function (e) {
-                try{
+                try {
                     if(e.target.value === 'true') {
                         obj[e.target.id](true);
                     } else if(e.target.value === 'false') {
