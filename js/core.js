@@ -586,8 +586,7 @@ function overlayPage (contentElement, top, right, bottom, left) {
     "use strict";
     var div = document.createElement('div');
     var contentContainer = document.createElement('div');
-    contentContainer.style.cssText = 'margin: 0px; padding: 0px; border: 0px;' +
-        'overflow: auto;';
+    contentContainer.style.cssText = 'margin: 0px; padding: 0px; border: 0px;' + 'overflow: auto;';
     contentElement.style.cssText = contentElement.style.cssText + 'overflow: auto;';
     contentContainer.appendChild(contentElement);
 
@@ -621,8 +620,9 @@ function overlayPage (contentElement, top, right, bottom, left) {
         'z-index:9999; background-color:white; color:black; overflow: auto;';
 
     div.appendChild(cl);
+    div.id = "Menu2"
     div.appendChild(contentContainer);
-    document.body.appendChild(div);
+    document.getElementById("menu").appendChild(div);
 
     cl.addEventListener('click', function (e) {
         div.parentNode.removeChild(div);
