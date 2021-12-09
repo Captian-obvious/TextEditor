@@ -1,5 +1,5 @@
 const ace = window.ace;
-var te = window.te;
+var te = {};
 window.addEventListener('load', function() {
     var container = document.getElementById('app');
     container.innerHTML = `
