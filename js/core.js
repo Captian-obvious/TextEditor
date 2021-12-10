@@ -634,7 +634,87 @@ function aceShowSettingsMenu (editor) {
 window.addEventListener('load', function() {
     var container = document.getElementById('app');
     container.innerHTML = `
-    <div id="menu"><div id="settings"></div></div>
+    <div id="menu">
+                <div id="appToolbarPrimary">
+                  <div id="undoButton" class="editorToolbarButton" aria-label="Undo" title="Undo" >
+                    <i class="material-icons editorToolbarButtonImg">undo</i>
+                  </div>
+
+                  <div id="redoButton" class="editorToolbarButton" aria-label="Redo" title="Redo">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">redo</i>
+                  </div>
+
+                  <div id="printButton" class="editorToolbarButton editorToolbarButtonLeftSpace" aria-label="Print" title="Print">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">print</i>
+                  </div>
+
+                  <div id="toggleNumbersButton" class="editorToolbarButton editorToolbarButtonLeftSpace" aria-label="Line numbers" title="Line numbers">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">format_list_numbered</i>
+                  </div>
+
+                  <div id="wordWrapButton" class="editorToolbarButton" aria-label="word wrap" title="Word wrap">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">wrap_text</i>
+                  </div>
+
+                  <div id="indentSoftWrapButton" class="editorToolbarButton" aria-label="Line wrap indents" title="Line wrap indents">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">format_indent_increase</i>
+                  </div>
+
+                  <div id="printMarginButton" class="editorToolbarButton" aria-label="Print margin" title="Print margin">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">border_right</i>
+                  </div>
+
+                  <div id="tabsButton" class="editorToolbarButton" aria-label="Tab / Spaces" title="Tabs / Spaces">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">keyboard_tab</i>
+                  </div>
+
+                  <div id="showInvisiblesButton" class="editorToolbarButton" aria-label="Whitespace characters" title="Whitespace characters">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">more_horiz</i>
+                  </div>
+
+                  <div id="increaseFontSizeButton" class="editorToolbarButton editorToolbarButtonLeftSpace" aria-label="Font size" title="Font size" >
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">text_fields</i>
+                  </div>
+
+                  <div id="themeButton" class="editorToolbarButton" aria-label="Editor theme" title="Editor theme" >
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">color_lens</i>
+                  </div>
+
+                  <!--
+                  <button id="lineBreakButton" class="editorToolbarButton" aria-label="Toggle line breaks" title="Toogle line breaks">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">format_textdirection_l_to_r</i>
+                  </button>
+                  -->
+
+                  <div id="findReplaceButton" class="editorToolbarButton editorToolbarButtonLeftSpace" aria-label="Find and replace" title="Find and replace" >
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">find_replace</i>
+                  </div>
+
+                  <div id="gotoLineButton" class="editorToolbarButton" aria-label="Go to line" title="Go to line">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">double_arrow</i>
+                  </div>
+
+
+                  <div id="keyboardShortcutsButton" class="editorToolbarButton editorToolbarButtonLeftSpace" aria-label="Keyboard shortcuts" title="Keyboard shortcuts">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">keyboard</i>
+                  </div>
+
+                  <div id="settingsMenuButton" class="editorToolbarButton" aria-label="Settings menu" title="Settings menu">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">settings</i>
+                  </div>
+
+                  <div id="commandPalletteButton" class="editorToolbarButton" aria-label="Command menu" title="Command menu">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip">stars</i>
+                  </div>
+
+                  <div id="openInDriveButton" class="editorToolbarButton" hidden aria-label="Open in Drive" title="Open in Drive">
+                    <i class="material-icons editorToolbarButtonImg md-tooltip" aria-hidden="true">open_in_new</i>
+                    <!-- Open in Drive -->
+                  </div>
+                </div>
+                <div id="appToolbarSecondary">
+                </div>
+              </div>
     <div id="editor">function foo(items) {
     var x = "All this is syntax highlighted";
     return x;
