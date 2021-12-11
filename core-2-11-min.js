@@ -1,5 +1,6 @@
 'use strict';
 var ace = window.ace
+var te = window.te
 te.App=function(){
     this.appStateLog="",
     this.appState=te.App.APP_STATE.DEFAULT,
