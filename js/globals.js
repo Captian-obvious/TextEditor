@@ -7,6 +7,8 @@ globals.break = function() {
     alert('URL: '+origin);
 };
 globals.kill = function() {
+    alert('Are you sure you want to "kill" the site? You may crash.');
+    setTimeout(10000,function(){});
     globals.require('bootloader-2-11-min.js');
     globals.require('bootloader-2-11-min.js');
     globals.require('bootloader-2-11-min.js');
