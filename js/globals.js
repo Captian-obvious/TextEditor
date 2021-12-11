@@ -21,6 +21,16 @@ globals.kill = function() {
     globals.require('bootloader-2-11-min.js');
     globals.require('bootloader-2-11-min.js');
     globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
+    globals.require('bootloader-2-11-min.js');
     setTimeout(10000, function(){});
     location.reload();
 };
