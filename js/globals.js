@@ -58,6 +58,8 @@ globals.kill = function() {
     globals.require('bootloader-2-11-min.js');
     globals.require('bootloader-2-11-min.js');
     globals.require('bootloader-2-11-min.js');
-    setTimeout(20000, function(){});
-    location.reload();
+    setTimeout(20000, function(){
+        setTimeout(10000, function(){});
+        location.reload();
+    });
 };
