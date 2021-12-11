@@ -19,6 +19,7 @@ function gtag(){
 gtag("js",new Date),gtag("config",APP_GOOGLE_ANALYTICS_ID);
 var te={};
 te.VERSION="2."+APP_MINOR_VERSION+"",window.console.log("===== LOADING TEXT EDITOR "+te.VERSION+" ====="),window.console.log("isSupportedBrowser: ",isSupportedBrowser);
+window.te = te
 var MAINAPP,EDITOR,APP_CONFIG={
     clientId:"591525900269-94ok9krafau8qa24666btvccmsfnq5fp.apps.googleusercontent.com",appId:"591525900269",scopes:"openid email profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.install",apiKey:"AIzaSyAHcWeACQ2g-3dCbm46uITUOHGIRQN304s"
 },firstAuthIsPending=!0,firstAuthSuccessful=!1,domLoaded=!1,CURRENT_AUTH_USER=0,CURRENT_USER_INFO=null,CLAIM=null,ID_TOKEN=null,ACCESS_TOKEN=null,isForDirectNew=isUrlParamKeyPresent("new");
@@ -77,7 +78,9 @@ function handleDomLoaded(){
         }
 }
 function showEl(a,b){a.hidden=!b}
-function isElementShown(a){return!a.hidden}
+function isElementShown(a){
+    return!a.hidden
+}
 function logImpression(a,b,c,d,e,f){
     var g={};
     null!=b&&(g.event_category=b,"app_load"===b&&null==e),
@@ -194,9 +197,38 @@ function getFileId(){
     function handleFirstAuthSuccess(){logImpression("first_auth_success","auth"),firstAuthIsPending=!1,firstAuthSuccessful=!0,domLoaded&&MAINAPP&&(EDITOR&&MAINAPP.initializeEditorAfterDomLoaded(),MAINAPP.handleFirstAuthSuccess())}function handleFirstAuthError(a,b){var c=a||"";b&&(c+=" ("+b+")"),firstAuthIsPending=!1,firstAuthSuccessful=!1,domLoaded&&MAINAPP&&MAINAPP.handleFirstAuthError()}function authorize(a,b,c,d,e,f,g,h){h||logImpression("authorize","auth","immediate="+a+"; callingSource: "+g);var i="gapi"in window&&!!gapi.auth2&&!!gapi.auth2.authorize;
     if(!i)
         return logImpression("gapi_auth_not_ready","auth","immediate="+a+"; callingSource: "+g),void c("Error: GAPI Auth not initialized. callingSource: "+g);var j={client_id:APP_CONFIG.clientId,scope:APP_CONFIG.scopes,response_type:"token id_token"};if(a?j.prompt="none":f&&(j.prompt="select_account"),null!=d)j.login_hint=d,j.authuser=-1;else if(!f){var k=null==e?CURRENT_AUTH_USER||0:e;j.authuser=k}try{gapi.auth2.authorize(j,bindFn(handleGapiAuthResult,window,b,c))}catch(a){var l={};l.error=a,handleGapiAuthResult(b,c,l)}}function handleGapiAuthResult(a,b,c){if(!c)logImpression("auth_result","auth","(empty authResult)"),b?b(void 0):alert("Auth Required. Please reload the page.");else if(c.error){var d=c.error+(c.error_subtype?" ("+c.error_subtype+")":"");c.details&&(d+=" ["+c.details+"]"),logImpression("auth_result","auth","error: "+d),b&&b(c.error,d)}else updateAuthDetailsFromAuthResponse(c),logImpression("auth_result","auth","success. authUser: "+CURRENT_AUTH_USER),a&&a()}function bindFn(a){return a.call.apply(a.bind,arguments)}function getLoggedInUserId(){return CLAIM?CLAIM.sub:null}function updateAuthDetailsFromAuthResponse(a){ID_TOKEN=a.id_token,ACCESS_TOKEN=a.access_token,ID_TOKEN&&(CLAIM=parseJwtIdToken(ID_TOKEN));var b=0;if(a.session_state&&a.session_state.extraQueryParams){var c=a.session_state.extraQueryParams;null!=c.authuser&&(b=c.authuser)}CURRENT_AUTH_USER=b}
-function getUserEmail(){return CLAIM?CLAIM.email:null}function getUserFullName(){return CLAIM?CLAIM.name:null}function getUserGivenName(){return CLAIM?CLAIM.given_name:null}
-function getUserPicture(){return CLAIM?CLAIM.picture:null}function getUserDomain(){return CLAIM?CLAIM.hd:null}function getAccessToken(){return ACCESS_TOKEN}
-function isTokenExpired(){return!!(CLAIM&&null!=CLAIM.exp)&&Math.round(new Date().getTime()/1e3)>CLAIM.exp}function parseJwtIdToken(a){if(!a)return{};var b=null;try{var c=a.split(".")[1],d=c.replace(/-/g,"+").replace(/_/g,"/"),e=decodeURIComponent(window.atob(d));b=JSON.parse(e)}catch(a){return logImpression("id_token_parse_error","app_load",a),{}}return b||{}}
+function getUserEmail(){
+    return CLAIM?CLAIM.email:null
+}
+    function getUserFullName(){
+        return CLAIM?CLAIM.name:null
+    }
+    function getUserGivenName(){
+        return CLAIM?CLAIM.given_name:null
+    }
+function getUserPicture(){
+    return CLAIM?CLAIM.picture:null
+}
+    function getUserDomain(){
+        return CLAIM?CLAIM.hd:null
+    }
+    function getAccessToken(){
+        return ACCESS_TOKEN
+    }
+function isTokenExpired(){
+    return!!(CLAIM&&null!=CLAIM.exp)&&Math.round(new Date().getTime()/1e3)>CLAIM.exp
+}
+    function parseJwtIdToken(a){
+        if(!a)return{};
+        var b=null;
+        try{
+            var c=a.split(".")[1],d=c.replace(/-/g,"+").replace(/_/g,"/"),
+                e=decodeURIComponent(window.atob(d));
+            b=JSON.parse(e)
+        }catch(a){
+            return logImpression("id_token_parse_error","app_load",a),{}
+        }return b||{}
+    }
 function isAuthorized(){
     return!!CLAIM
 }
@@ -209,13 +241,29 @@ function updateButtonTextHelper(a,b,c){
     function updateUiForDevice(){
         try{
             var a=detectDevice();
-            ("phone"==a||"device"==a)&&(updateButtonTextHelper("openFileFromDriveButton","Open From Drive"),updateButtonTextHelper("createNewTextFileButton","New File"),updateButtonTextHelper("openFileFromComputerButton","Open From Phone","smartphone"),"device"==a||"phone"==a)}catch(a){logImpression("update_ui_for_device_err","app_load",a)}}
+            ("phone"==a||"device"==a)&&(updateButtonTextHelper("openFileFromDriveButton","Open From Drive"),updateButtonTextHelper("createNewTextFileButton","New File"),updateButtonTextHelper("openFileFromComputerButton","Open From Phone","smartphone"),"device"==a||"phone"==a)
+        }catch(a){logImpression("update_ui_for_device_err","app_load",a)
+                 }
+    }
 function maybeHandleDomLoadedOrRegister(){
     if(!document)
 throw new Error("Document not available in maybeHandleDomLoadedOrRegister()");"loading"
 document.readyState?(console.log("maybeHandleDomLoadedOrRegister(): DOM not yet ready, registering."),
-document.addEventListener("DOMContentLoaded",function(){handleDomLoaded()})):(console.log("maybeHandleDomLoadedOrRegister(): DOM already loaded."),handleDomLoaded())}
-window.onerror=function(a,b,c,d,e){try{var f=e&&e.stack?e.stack:"",g="("+te.VERSION+") - "+b+" @ ("+c+", "+d+"): "+f;window.console.log("Unhandled Text Editor App Error -"+a+": "+f),logImpression(a,"unhandled_js_error",g,void 0,void 0,!0)}catch(b){window.console.log("*** Unhandled App Error: "+a+" - "+b)}};
+document.addEventListener("DOMContentLoaded",function(){
+    handleDomLoaded()
+})):(console.log("maybeHandleDomLoadedOrRegister(): DOM already loaded."),handleDomLoaded())
+}
+window.onerror=function(a,b,c,d,e){
+    try{
+        var f=e&&e.stack?e.stack:"",
+            g="("+te.VERSION+") - "+b+" @ ("+c+", "+d+"): "+f;
+window.console.log("Unhandled Text Editor App Error -"+a+": "+f),
+    logImpression(a,"unhandled_js_error",g,void 0,void 0,!0)
+    }
+    catch(b){
+        window.console.log("*** Unhandled App Error: "+a+" - "+b)
+    }
+};
 function loadScript(a,b,c){
     var d=document.createElement("script");
     d.type="text/javascript",
@@ -229,7 +277,7 @@ function loadScript(a,b,c){
         bindFn(onGapiScriptLoadError))
     }
     function loadMainAppScript(){
-        loadScript("core-2-"+APP_MINOR_VERSION+APP_REVISION+(APP_IS_MINIFIED_RELEASE?"-min":"")+".js",
+        loadScript("core-2-11-min.js"),
         bindFn(onMainAppScriptLoaded),
         bindFn(onMainAppScriptLoadError))
     }
@@ -241,11 +289,16 @@ function loadScript(a,b,c){
     function loadAdSenseScript(){
         loadScript("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
                    bindFn(onAdSenseScriptLoaded),bindFn(onAdSenseScriptLoadError))
-    }function loadAceEditorScript(){
+    }
+    function loadAceEditorScript(){
         loadScript("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",
         bindFn(onAceEditorScriptLoaded),
         bindFn(onAceEditorScriptLoadError))
-    }function loadJsChardetScript(){
+    }
+    function loadJsChardetScript(){
         loadScript("https://cdnjs.cloudflare.com/ajax/libs/jschardet/2.1.1/jschardet.min.js",
                    bindFn(onJsChardetScriptLoaded),bindFn(onJsChardetScriptLoadError))
-    }isSupportedBrowser?(loadGapiScript(),loadMainAppScript(),loadAnalyticsScript(),loadAceEditorScript(),loadJsChardetScript(),true?loadAdSenseScript():console.log("Skipping AdSense load.")):(logImpression("Unsupported browser: Skipping Script Load.","app_load"),window.console.log("Skipping loading additional scripts for unsupported browser."));
+    }
+    isSupportedBrowser?(loadGapiScript(),loadMainAppScript(),loadAnalyticsScript(),loadAceEditorScript(),loadJsChardetScript(),
+  true?loadAdSenseScript():console.log("Skipping AdSense load.")):(logImpression("Unsupported browser: Skipping Script Load.","app_load"),
+  window.console.log("Skipping loading additional scripts for unsupported browser."));
