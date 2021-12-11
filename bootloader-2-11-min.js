@@ -279,7 +279,7 @@ function loadScript(a,b,c){
     function loadMainAppScript(){
         loadScript("core-2-11-min.js"),
         bindFn(onMainAppScriptLoaded),
-        bindFn(onMainAppScriptLoadError))
+        bindFn(onMainAppScriptLoadError)
     }
     function loadAnalyticsScript(){
         loadScript("https://www.googletagmanager.com/gtag/js?id=UA-74999669-1",
