@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var ace = window.ace;
 var te = window.te;
 (te.App = function () {
