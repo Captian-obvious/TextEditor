@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var APP_MAJOR_VERSION = 2,
     APP_MINOR_VERSION = 11,
     APP_REVISION = "",
