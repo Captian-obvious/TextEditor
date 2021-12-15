@@ -25,8 +25,8 @@ function isBrowserIE11OrOlder() {
         if (0 < b) return !0;
         var c = a.indexOf("Trident/");
         return !!(0 < c);
-    } catch (a) {
-        return console.log("error during detection of browser: " + a), !0;
+    } catch (e) {
+        return console.log("error during detection of browser: " + e), !0;
     }
 }
 var isSupportedBrowser = !isBrowserIE11OrOlder(),
